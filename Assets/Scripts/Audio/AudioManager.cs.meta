@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 3ed9be95d65defd459695d17fbf57848
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - prefab: {fileID: 387202167309142629, guid: 49545d61f90c1cb42a14aa4a9c449a89, type: 3}
+  - mixerEffects: {fileID: -2343884126872179957, guid: a8c55447973488546a28aa6890823d29,
+      type: 2}
+  - mixerMusic: {fileID: -2075441706198944951, guid: a8c55447973488546a28aa6890823d29,
+      type: 2}
+  - mixerAmbience: {fileID: 2108147217575252264, guid: a8c55447973488546a28aa6890823d29,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,32 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RoboRyanTron.SearchableEnum;
 
 public class PickupController : MonoBehaviour
 {
     const float PickSphereRadius = 0.3f;
 
     public LayerMask pickupLayer;
-    public string cameraPickup;
-    public float pickMaxDistance = 1.5f;
 
+    public string pickupLayerName = "Pickable";
+    public string cameraLayerName = "PickupCamera";
+    
+    [Space(10.0f)]
+    public float pickMaxDistance = 1.5f;
+    public float throwForce = 20.0f;
+
+    [Space(10.0f)]
     public Transform hands;
-    public PickableObject holdee;
+    
+
+    [Header("Keys")]
+    [SearchableEnum] public KeyCode interactKey;
+    [SearchableEnum] public KeyCode dropKey;
 
     [Header("Animation")]
     public float lerpTime = 0.3f;
     public AnimationCurve lerpCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
+    PickableObject holdee;
+    Transform previousParent;
     Camera cam;
 
     private void Awake()
     {
-        cam = Camera.main;    
+        cam = Camera.main;
     }
 
     private void Update()
     {
-        if(holdee == null && Input.GetKeyDown(KeyCode.E))
+        if (holdee == null && Input.GetKeyDown(interactKey))
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -34,25 +47,69 @@ public class PickupController : MonoBehaviour
             if (Physics.SphereCast(ray, PickSphereRadius, out hit, pickMaxDistance, pickupLayer.value))
             {
                 GameObject go = hit.transform.gameObject;
-                StartCoroutine(MoveToHands(go));
+                holdee = go.GetComponent<PickableObject>();
+
+                if (holdee)
+                    StartCoroutine(MoveToHands(holdee));
             }
+
+            return;
         }
 
-        if(holdee != null && Input.GetKeyDown(KeyCode.Q))
+        if (holdee != null)
         {
-            GameObject g = holdee.gameObject;
-            Destroy(g);
-            holdee = null;
+            if (Input.GetKeyDown(interactKey))
+            {
+                ThrowObject();
+                holdee = null;
+            }
+
+            if (Input.GetKeyDown(dropKey))
+            {
+                DropObject();
+                holdee = null;
+            }
+
         }
     }
 
-    IEnumerator MoveToHands (GameObject go)
+    void ThrowObject()
     {
-        float t = 0.0f;
-        Vector3 startWorld = go.transform.position;
-        go.layer = LayerMask.GetMask(cameraPickup);
+        DropObject();
+        holdee.Rigidbody.AddForce(cam.transform.forward * throwForce, ForceMode.Impulse);
+    }
 
-        Debug.Log(go.layer);
+    void DropObject()
+    {
+        holdee.gameObject.layer = LayerMask.NameToLayer(pickupLayerName);
+        AttachObjectToHand(false, holdee);
+        holdee.EnablePhysics(true);
+    }
+
+    void AttachObjectToHand(bool state, PickableObject go)
+    {
+        if (state)
+        {
+            previousParent = go.transform.parent;
+            go.transform.SetParent(hands);
+            go.transform.localPosition = Vector3.zero;
+        }
+        else
+        {
+            go.transform.SetParent(previousParent, true);
+        }
+    }
+
+    IEnumerator MoveToHands(PickableObject go)
+    {
+        if (go == null)
+            yield break;
+
+        Vector3 startWorld = go.transform.position;
+        go.gameObject.layer = LayerMask.NameToLayer(cameraLayerName);
+        go.EnablePhysics(false);
+
+        float t = 0.0f;
         while (t <= 1.0f)
         {
             t += Time.deltaTime / lerpTime;
@@ -62,7 +119,6 @@ public class PickupController : MonoBehaviour
             yield return null;
         }
 
-        go.transform.SetParent(hands);
-        go.transform.localPosition = Vector3.zero;
+        AttachObjectToHand(true, go);
     }
 }

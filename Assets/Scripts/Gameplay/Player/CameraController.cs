@@ -14,9 +14,7 @@ public class CameraController : MonoBehaviour
     LayerMask interactionMask;
     float xAxisClamp = 0f;
 
-#if DYNAMIC_DEPTH_OF_FIELD
     DynamicDepthOfField dynamicDepthOfField;
-#endif
 
     private void Awake()
     {
@@ -26,13 +24,7 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
         interactionMask = body.GetComponent<MovementController>().interactionMask;
-
-#if DYNAMIC_DEPTH_OF_FIELD
         dynamicDepthOfField = GetComponent<DynamicDepthOfField>();
-
-        if (dynamicDepthOfField != null)
-            dynamicDepthOfField.InteractionMask = interactionMask;
-#endif
     }
 
 
@@ -76,15 +68,12 @@ public class CameraController : MonoBehaviour
         transform.rotation = Quaternion.Euler(targetRotCamera);
         body.rotation = Quaternion.Euler(targetRotBody);
 
-#if DYNAMIC_DEPTH_OF_FIELD
         dynamicDepthOfField.UpdateDepthOfField();
-#endif
     }
 
 
     private void OnDrawGizmos()
     {
-#if DYNAMIC_DEPTH_OF_FIELD
         if (dynamicDepthOfField != null)
         {
             if (dynamicDepthOfField.HasFocus)
@@ -98,6 +87,5 @@ public class CameraController : MonoBehaviour
                 Debug.DrawRay(transform.position, transform.forward * 100f);
             }
         }
-#endif
     }
 }

@@ -14,14 +14,23 @@ public class ObjectData : MonoBehaviour
     public float ScaledVolume => m_scaledVolume;
     float m_scaledVolume;
 
-    public float Mass => ScaledVolume * materialData.density;
+    public float Mass => ScaledVolume * (materialData != null ? materialData.density : 1.0f);
 
     void Start()
     {
-        RecalculateMeshVolume();
+        RecalculateMeshVolume(materialData);
     }
 
-    public void RecalculateMeshVolume ()
+    public void RecalculateMeshVolume(MaterialData materialData)
+    {
+        if(materialData != null)
+        {
+            this.materialData = materialData;
+            RecalculateMeshVolume();
+        }
+    }
+
+    public void RecalculateMeshVolume()
     {
         Mesh mesh = GetComponent<MeshFilter>().sharedMesh;
         int meshKey = mesh.GetHashCode();
@@ -34,13 +43,15 @@ public class ObjectData : MonoBehaviour
 
         float scale = transform.localScale.x * transform.localScale.y * transform.localScale.z;
         m_scaledVolume = m_volume * scale;
+
+        GetComponent<Rigidbody>().mass = Mass;
     }
 
     public static float VolumeOfMesh(Mesh mesh)
     {
-        float volume = 0;
         Vector3[] vertices = mesh.vertices;
         int[] triangles = mesh.triangles;
+        float volume = 0;
 
         for (int i = 0; i < mesh.triangles.Length; i += 3)
         {
@@ -49,6 +60,7 @@ public class ObjectData : MonoBehaviour
             Vector3 p3 = vertices[triangles[i + 2]];
             volume += SignedVolumeOfTriangle(p1, p2, p3);
         }
+
         return Mathf.Abs(volume);
     }
 

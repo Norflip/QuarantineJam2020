@@ -19,11 +19,12 @@ public class MovementController : MonoBehaviour
 
     [SerializeField] private bool walking = true;
     [SerializeField] private bool grounded = true;
+    [SerializeField] private Vector3 externalVelocity;
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        
+        externalVelocity = Vector3.zero;
     }
 
     private void FixedUpdate()
@@ -34,13 +35,15 @@ public class MovementController : MonoBehaviour
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical"));
         input.Normalize();
 
-        Vector3 moveDirection;
+        externalVelocity += gravityDirection * gravityForce * Time.fixedDeltaTime;
 
+        Vector3 moveDirection;
         moveDirection = new Vector3(input.x, -0.1f, input.z);
-        moveDirection = transform.TransformDirection(moveDirection) * movementSpeed;
-        moveDirection -= gravityDirection * gravityForce * Time.fixedDeltaTime;
+        moveDirection = transform.TransformDirection(moveDirection) * movementSpeed + externalVelocity;
 
         grounded = (characterController.Move(moveDirection * Time.fixedDeltaTime) & CollisionFlags.Below) != 0;
+
+        externalVelocity *= 0.95f;
     }
 
 }

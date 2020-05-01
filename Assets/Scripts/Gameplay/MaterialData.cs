@@ -14,4 +14,7 @@ public class MaterialData : ScriptableObject
 
     public ObjectRarityValue rarity;
     public float density = 1.0f;
+
+    public bool breakable = true;
+    public Material crossSectionMaterial;
 }

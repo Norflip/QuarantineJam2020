@@ -8,17 +8,16 @@ public class PickupController : MonoBehaviour
     const float PickSphereRadius = 0.3f;
 
     public LayerMask pickupLayer;
-
     public string pickupLayerName = "Pickable";
     public string cameraLayerName = "PickupCamera";
-    
+
     [Space(10.0f)]
     public float pickMaxDistance = 1.5f;
     public float throwForce = 20.0f;
 
     [Space(10.0f)]
     public Transform hands;
-    
+
 
     [Header("Keys")]
     [SearchableEnum] public KeyCode interactKey;
@@ -58,10 +57,9 @@ public class PickupController : MonoBehaviour
 
         if (holdee != null)
         {
-            if (Input.GetKeyDown(interactKey))
+            if (Input.GetMouseButtonDown(0))
             {
-                ThrowObject();
-                holdee = null;
+                UseObject();
             }
 
             if (Input.GetKeyDown(dropKey))
@@ -73,10 +71,21 @@ public class PickupController : MonoBehaviour
         }
     }
 
-    void ThrowObject()
+    void UseObject()
     {
-        DropObject();
-        holdee.Rigidbody.AddForce(cam.transform.forward * throwForce, ForceMode.Impulse);
+        if (holdee.DropOnUse)
+        {
+            holdee.gameObject.layer = LayerMask.NameToLayer(pickupLayerName);
+            AttachObjectToHand(false, holdee);
+            holdee.EnablePhysics(true);
+        }
+
+        holdee.UseObject(cam.transform, throwForce);
+
+        if (holdee.DropOnUse)
+        {
+            holdee = null;
+        }
     }
 
     void DropObject()
@@ -106,6 +115,8 @@ public class PickupController : MonoBehaviour
             yield break;
 
         Vector3 startWorld = go.transform.position;
+        Quaternion startRotation = go.transform.rotation;
+
         go.gameObject.layer = LayerMask.NameToLayer(cameraLayerName);
         go.EnablePhysics(false);
 
@@ -116,6 +127,10 @@ public class PickupController : MonoBehaviour
             float tt = lerpCurve.Evaluate(t);
 
             go.transform.position = Vector3.Lerp(startWorld, hands.position, tt);
+
+            if (go.changeRotationOnPickup)
+                go.transform.rotation = Quaternion.Lerp(startRotation, hands.rotation, tt);
+            
             yield return null;
         }
 

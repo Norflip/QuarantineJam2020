@@ -15,7 +15,6 @@ public class MovementController : MonoBehaviour
     [SerializeField] 
     float velocity;
 
-
     CharacterController characterController;
 
     [SerializeField] private bool walking = true;

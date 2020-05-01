@@ -11,9 +11,15 @@ public class Slicetable : MonoBehaviour
 
     private void Start()
     {
+        if(slicee == null)
+        {
+            Debug.LogError("no slicee");
+            return;
+        }
+
         GameObject[] gos = slicee.SliceInstantiate(slicee.transform.position, planeNormal.normalized, crossSection);
 
-        Debug.Log("Created " + gos.Length + "");
+        Debug.Log("Created " + (gos != null ? gos.Length : 0) + "");
         Destroy(slicee.gameObject);
     }
 }

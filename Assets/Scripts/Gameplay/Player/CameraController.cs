@@ -73,8 +73,8 @@ public class CameraController : MonoBehaviour
             targetRotCamera.x = 270f;
         }
 
-        transform.localRotation = Quaternion.Euler(targetRotCamera);
-        body.localRotation = Quaternion.Euler(targetRotBody);
+        transform.rotation = Quaternion.Euler(targetRotCamera);
+        body.rotation = Quaternion.Euler(targetRotBody);
 
 #if DYNAMIC_DEPTH_OF_FIELD
         dynamicDepthOfField.UpdateDepthOfField();

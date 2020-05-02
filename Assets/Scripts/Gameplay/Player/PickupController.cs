@@ -14,6 +14,7 @@ public class PickupController : MonoBehaviour
     [Space(10.0f)]
     public float pickMaxDistance = 1.5f;
     public float throwForce = 20.0f;
+    public float maxCarryCapacity = 60.0f;
 
     [Space(10.0f)]
     public Transform hands;
@@ -48,8 +49,14 @@ public class PickupController : MonoBehaviour
                 GameObject go = hit.transform.gameObject;
                 holdee = go.GetComponent<PickableObject>();
 
-                if (holdee)
+                if(CanLiftObject(holdee))
+                {
                     StartCoroutine(MoveToHands(holdee));
+                }
+                else
+                {
+                    Debug.Log("Cant lift object");
+                }
             }
 
             return;
@@ -69,6 +76,11 @@ public class PickupController : MonoBehaviour
             }
 
         }
+    }
+
+    bool CanLiftObject (PickableObject po)
+    {
+        return po != null && po.MeshVolume * po.materialData.weight < maxCarryCapacity;
     }
 
     void UseObject()

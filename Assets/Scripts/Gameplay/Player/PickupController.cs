@@ -80,7 +80,7 @@ public class PickupController : MonoBehaviour
             holdee.EnablePhysics(true);
         }
 
-        holdee.UseObject(cam.transform, throwForce);
+        holdee.OnLeftClick(cam.transform, throwForce);
 
         if (holdee.DropOnUse)
         {

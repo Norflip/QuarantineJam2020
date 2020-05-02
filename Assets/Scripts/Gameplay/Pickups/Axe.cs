@@ -17,13 +17,15 @@ public class Axe : PickableObject
     Animator animator;
     Transform user;
 
+    public override bool DropOnUse => false;
+
     protected override void Awake()
     {
         base.Awake();
         animator = GetComponent<Animator>();
     }
 
-    public override void UseObject(Transform user, float force)
+    public override void OnLeftClick(Transform user, float force)
     {
         if (lastSwing == -1 || lastSwing + swingCooldown < Time.time)
         {
@@ -56,22 +58,35 @@ public class Axe : PickableObject
 
     void SplitObjects(Transform user)
     {
+        Debug.Log("SLICING");
+
         Ray rr = new Ray(user.position, user.forward);
         RaycastHit[] hh = Physics.SphereCastAll(rr, 0.1f, 5.0f, destroyableMask.value);
+        Slicable slicee;
 
-        //Debug.Log("HH: " + hh.Length);
-
+        List<Slicable> slicees = new List<Slicable>();
+        HashSet<Slicable> visited = new HashSet<Slicable>();
+            
         for (int i = 0; i < hh.Length; i++)
         {
             if(hh[i].transform != transform)
             {
-                PickableObject po = hh[i].transform.GetComponent<PickableObject>();
-                if(po != null && po.ObjectData.materialData.breakable)
+                slicee = hh[i].transform.GetComponent<Slicable>();
+
+                if(slicee != null && slicee.materialData.breakable && !visited.Contains(slicee))
                 {
-                    PickableObject[] newObjects;
-                    po.TrySlice(user.position, user.right, true, out newObjects);
+                    slicees.Add(slicee);
+                    visited.Contains(slicee);
                 }
             }
+        }
+
+        Debug.Log(slicees.Count);
+
+        for (int i = 0; i < slicees.Count; i++)
+        {
+            Debug.Log(slicees[i].name);
+            slicees[i].TrySlice(user.position, user.right, true, out _);
         }
     }
 

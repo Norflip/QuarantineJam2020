@@ -7,13 +7,13 @@ public class MaterialData : ScriptableObject
 {
     public enum ObjectRarityValue
     {
-        Common,
-        Rare,
-        Epic
+        Common = 100, 
+        Rare = 165,
+        Epic = 220
     }
 
     public ObjectRarityValue rarity;
-    public float density = 1.0f;
+    public float weight = 1.0f;
 
     public bool breakable = true;
     public Material crossSectionMaterial;

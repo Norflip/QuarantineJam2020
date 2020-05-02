@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class PickableObject : MonoBehaviour
 {
+    public const float MinimumVolume = 0.01f;
+
     public MaterialData materialData;
     public bool changeRotationOnPickup = false;
 
@@ -20,7 +22,6 @@ public abstract class PickableObject : MonoBehaviour
     }
 
     Rigidbody m_rb;
-
     public float MeshVolume => meshVolume;
     float meshVolume;
 
@@ -35,8 +36,14 @@ public abstract class PickableObject : MonoBehaviour
     public void RecalculateVolume ()
     {
         meshVolume = MeshData.CalculateMeshVolume(GetComponent<MeshFilter>().sharedMesh, transform.localScale);
+        if(meshVolume < MinimumVolume)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         OriginalMeshVolume = meshVolume;
-        Rigidbody.mass = meshVolume * materialData.density;
+        Rigidbody.mass = meshVolume * materialData.weight;
     }
 
     public abstract void OnLeftClick(Transform user, float force);

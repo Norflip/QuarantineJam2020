@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using EzySlice;
+using UnityMeshSimplifier;
 
 [RequireComponent(typeof(ObjectData))]
 public class PickableObject : MonoBehaviour
@@ -97,6 +98,8 @@ public class PickableObject : MonoBehaviour
         upper.transform.SetParent(transform.parent);
 
         Mesh m = tmp.GetComponent<MeshFilter>().mesh;
+
+
 
         upper.GetComponent<MeshFilter>().mesh = m;
         upper.GetComponent<MeshCollider>().sharedMesh = m;

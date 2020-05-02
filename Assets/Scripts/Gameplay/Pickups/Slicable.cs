@@ -16,7 +16,7 @@ public class Slicable : PickableObject
 
     bool m_broken = false;
 
-    public void OnSplit ()
+    public void OnSplit()
     {
         m_broken = true;
         RecalculateVolume();
@@ -33,19 +33,16 @@ public class Slicable : PickableObject
             Vector3 localPosition = transform.InverseTransformPoint(position);
             Vector3 localNormal = transform.InverseTransformDirection(normal);
             EzySlice.Plane plane = new EzySlice.Plane(localPosition, localNormal);
-
+        
             GameObject[] objs = gameObject.SliceInstantiate(plane, new TextureRegion(0, 0, 1, 1), materialData.crossSectionMaterial);
 
             if (objs != null)
             {
                 objects = new Slicable[objs.Length];
-
                 for (int i = 0; i < objs.Length; i++)
                     objects[i] = CreateSplitPiece(objs[i], position, normal);
 
-                if (selfDestroy)
-                    Destroy(gameObject);
-
+                Destroy(gameObject);
                 split = true;
             }
             else
@@ -65,15 +62,14 @@ public class Slicable : PickableObject
         MeshRenderer mr = upper.GetComponent<MeshRenderer>();
         mr.materials = tmp.GetComponent<MeshRenderer>().materials;
 
-        upper.transform.position = tmp.transform.position;
-        upper.transform.rotation = tmp.transform.rotation;
-        upper.transform.localScale = tmp.transform.localScale;
+        //upper.transform.position = tmp.transform.position;
+        //upper.transform.rotation = tmp.transform.rotation;
+        //upper.transform.localScale = tmp.transform.localScale;
         upper.transform.SetParent(transform.parent);
 
         Mesh m = tmp.GetComponent<MeshFilter>().mesh;
         upper.GetComponent<MeshFilter>().mesh = m;
         Destroy(tmp);
-
 
         MeshCollider mc = upper.GetComponent<MeshCollider>();
         mc.convex = true;
@@ -92,27 +88,37 @@ public class Slicable : PickableObject
         this.Rigidbody.AddForce(user.forward * force, ForceMode.Impulse);
     }
 
-    public Slicable CreateHull(Slicable original, Mesh mm, Material crossSectionMat)
+    public Slicable CreateHull(Mesh mm)
     {
+        if (mm = null)
+            return null;
+
         Slicable newObject = Instantiate(this);
 
         if (newObject != null)
         {
-            newObject.transform.localPosition = original.transform.localPosition;
-            newObject.transform.localRotation = original.transform.localRotation;
-            newObject.transform.localScale = original.transform.localScale;
+            newObject.GetComponent<MeshFilter>().mesh = mm;
 
-            Material[] shared = original.GetComponent<MeshRenderer>().sharedMaterials;
-            Mesh og_mesh = original.GetComponent<MeshFilter>().sharedMesh;
+            MeshCollider mc = newObject.GetComponent<MeshCollider>();
+            mc.convex = true;
+            mc.sharedMesh = null;
+            mc.sharedMesh = mm;
 
-            // nothing changed in the hierarchy, the cross section must have been batched
-            // with the submeshes, return as is, no need for any changes
-            if (og_mesh.subMeshCount == mm.subMeshCount)
-            {
-                // the the material information
-                newObject.GetComponent<Renderer>().sharedMaterials = shared;
-                return newObject;
-            }
+            newObject.transform.localPosition = transform.localPosition;
+            newObject.transform.localRotation = transform.localRotation;
+            newObject.transform.localScale = transform.localScale;
+
+            Material[] shared = GetComponent<MeshRenderer>().sharedMaterials;
+            Mesh og_mesh = GetComponent<MeshFilter>().mesh;
+
+            //// nothing changed in the hierarchy, the cross section must have been batched
+            //// with the submeshes, return as is, no need for any changes
+            //if (og_mesh.subMeshCount == mm.subMeshCount)
+            //{
+            //    // the the material information
+            //    newObject.GetComponent<Renderer>().sharedMaterials = shared;
+            //    return newObject;
+            //}
 
             // otherwise the cross section was added to the back of the submesh array because
             // it uses a different material. We need to take this into account
@@ -120,7 +126,7 @@ public class Slicable : PickableObject
 
             // copy our material arrays across using native copy (should be faster than loop)
             System.Array.Copy(shared, newShared, shared.Length);
-            newShared[shared.Length] = crossSectionMat;
+            newShared[shared.Length] = materialData.crossSectionMaterial;
 
             // the the material information
             newObject.GetComponent<Renderer>().sharedMaterials = newShared;

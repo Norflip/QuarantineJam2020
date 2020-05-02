@@ -99,10 +99,14 @@ public class PickableObject : MonoBehaviour
 
         Mesh m = tmp.GetComponent<MeshFilter>().mesh;
 
-
+        float quality = 0.5f;
+        var simp = new UnityMeshSimplifier.MeshSimplifier();
+        simp.Initialize(m);
+        simp.SimplifyMesh(quality);
+        var destMesh = simp.ToMesh();
 
         upper.GetComponent<MeshFilter>().mesh = m;
-        upper.GetComponent<MeshCollider>().sharedMesh = m;
+        upper.GetComponent<MeshCollider>().sharedMesh = destMesh;
         upper.GetComponent<ObjectData>().RecalculateMeshVolume();
         upper.MarkAsBroken();
 

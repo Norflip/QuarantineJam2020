@@ -123,7 +123,7 @@ public class Slicable : PickableObject
 
             if(freezeTimer >= REQUIRED_FREEZE_TIME)
             {
-                Debug.Log(sqrv + " < " + (MINIMUM_STICK_VELOCITY * MINIMUM_STICK_VELOCITY));
+               // Debug.Log(sqrv + " < " + (MINIMUM_STICK_VELOCITY * MINIMUM_STICK_VELOCITY));
                 CollectionManager.Instance.AddObject(this);
                 return;
             }

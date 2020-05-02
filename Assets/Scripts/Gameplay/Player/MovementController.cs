@@ -5,6 +5,8 @@ using TMPro;
 
 public class MovementController : MonoBehaviour
 {
+    const float BODY_HIT_FORCE = 4.0f;
+
     public LayerMask interactionMask;
     public float movementSpeed = 15.0f;
 
@@ -20,6 +22,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] private bool walking = true;
     [SerializeField] private bool grounded = true;
     [SerializeField] private Vector3 externalVelocity;
+    Vector3 controllerContactPoint;
 
     private void Awake()
     {
@@ -42,8 +45,18 @@ public class MovementController : MonoBehaviour
         moveDirection = transform.TransformDirection(moveDirection) * movementSpeed + externalVelocity;
 
         grounded = (characterController.Move(moveDirection * Time.fixedDeltaTime) & CollisionFlags.Below) != 0;
-
         externalVelocity *= 0.95f;
     }
 
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        controllerContactPoint = hit.point;
+        Debug.Log("hit: " + hit.gameObject.name);
+
+        if(hit.rigidbody != null)
+        {
+            Vector3 direction = (hit.point - transform.position).normalized;
+            hit.rigidbody.AddForce(direction * BODY_HIT_FORCE, ForceMode.Force);
+        }
+    }
 }

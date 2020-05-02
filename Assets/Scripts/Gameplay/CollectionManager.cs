@@ -25,8 +25,6 @@ public class CollectionManager : MonoSingleton<CollectionManager>
         clone.transform.localScale = obj.transform.localScale;
         clone.transform.rotation = obj.transform.rotation;
 
-
-
         float pp = CalculatePoints(obj);
         points.Add(pp);
         Destroy(obj.gameObject);

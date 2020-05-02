@@ -9,9 +9,10 @@ public abstract class PickableObject : MonoBehaviour
 
     public MaterialData materialData;
     public bool changeRotationOnPickup = false;
+    public bool startAsleep = true;
 
     public abstract bool DropOnUse { get; }
-    
+
     public Rigidbody Rigidbody
     {
         get
@@ -22,6 +23,9 @@ public abstract class PickableObject : MonoBehaviour
     }
 
     Rigidbody m_rb;
+
+    public float Mass => meshVolume * materialData.weight;
+
     public float MeshVolume => meshVolume;
     float meshVolume;
 
@@ -31,12 +35,14 @@ public abstract class PickableObject : MonoBehaviour
     protected virtual void Awake()
     {
         RecalculateVolume();
+        if (startAsleep)
+            Rigidbody.Sleep();
     }
 
-    public void RecalculateVolume ()
+    public void RecalculateVolume()
     {
         meshVolume = MeshData.CalculateMeshVolume(GetComponent<MeshFilter>().sharedMesh, transform.localScale);
-        if(meshVolume < MinimumVolume)
+        if (meshVolume < MinimumVolume)
         {
             Destroy(gameObject);
             return;

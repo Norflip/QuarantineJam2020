@@ -12,29 +12,20 @@ public class Slicable : PickableObject
     public const float REQUIRED_FREEZE_TIME = 0.2f;
     public const float LIFETIME = 24.0f;
 
-    public float freezeTimer = 0.0f;
-    public float lastFreezeTime = -1;
-
-    public enum SlicableState
-    {
-        Freezed,
-
-    }
-
+    
     const float SplitForce = 10.0f;
     public string collectionLayer = "Collection";
 
     public bool Broken => m_broken;
     public override bool DropOnUse => true;
 
-    bool active = false;
     bool m_broken = false;
-    SlicableState state;
+    float freezeTimer = 0.0f;
+    float lastFreezeTime = -1;
 
     protected override void Awake()
     {
         base.Awake();
-        state = SlicableState.Freezed;
     }
 
     public void OnSplit()
@@ -113,7 +104,6 @@ public class Slicable : PickableObject
     public override void OnLeftClick(Transform user, float force)
     {
         this.Rigidbody.AddForce(user.forward * force, ForceMode.Impulse);
-        this.active = true;
     }
 
     private void OnCollisionStay(Collision collision)

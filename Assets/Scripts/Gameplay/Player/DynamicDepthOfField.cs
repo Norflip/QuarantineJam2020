@@ -59,7 +59,7 @@ public class DynamicDepthOfField : MonoBehaviour
 
     void SetFocus()
     {
-        depthOfField.focusDistance.value = Mathf.Lerp(depthOfField.focusDistance.value, m_hitDistance, focusSpeed * Time.deltaTime);
+        //depthOfField.focusDistance.value = Mathf.Lerp(depthOfField.focusDistance.value, m_hitDistance, focusSpeed * Time.deltaTime);
     }
 
     private void OnDrawGizmos()

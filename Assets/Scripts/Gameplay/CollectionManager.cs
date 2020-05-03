@@ -8,6 +8,8 @@ public class CollectionManager : MonoSingleton<CollectionManager>
 {
     public const float BROKEN_MODIFIER = 0.2f;
     public string collectionLayer = "Collection";
+    public Color freezeColor = new Color(0, 0, 1);
+    [Range(0f, 1f)] public float range = 0.5f;
 
     List<float> points = new List<float>();
     public Transform container;
@@ -16,11 +18,21 @@ public class CollectionManager : MonoSingleton<CollectionManager>
     {
         GameObject clone = new GameObject("Clone");
         clone.AddComponent<MeshFilter>().sharedMesh = obj.GetComponent<MeshFilter>().sharedMesh;
-        clone.AddComponent<MeshRenderer>().sharedMaterials = obj.GetComponent<MeshRenderer>().sharedMaterials;
+
+        Material[] oldMats = obj.GetComponent<MeshRenderer>().materials;
+        Material[] mats = new Material[oldMats.Length];
+
+        for (int i = 0; i < oldMats.Length; i++)
+        {
+            Material m = oldMats[i];
+            m.color = Color.Lerp(m.color, freezeColor, range);
+            mats[i] = m;
+        }
+        
+        clone.AddComponent<MeshRenderer>().sharedMaterials = mats;
         clone.AddComponent<MeshCollider>().sharedMesh = obj.GetComponent<MeshCollider>().sharedMesh;
         clone.layer = LayerMask.NameToLayer(collectionLayer);
         clone.transform.SetParent(container);
-
         clone.transform.position = obj.transform.position;
         clone.transform.localScale = obj.transform.localScale;
         clone.transform.rotation = obj.transform.rotation;

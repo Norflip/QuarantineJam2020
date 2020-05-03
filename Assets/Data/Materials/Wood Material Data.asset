@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aee5969afacef6409031eca0c0a29fb, type: 3}
   m_Name: Wood Material Data
   m_EditorClassIdentifier: 
-  rarity: 0
-  density: 50
+  rarity: 100
+  weight: 10
   breakable: 1
   crossSectionMaterial: {fileID: 2100000, guid: a89bef69bad65be439dd26fcb005986f,
     type: 2}

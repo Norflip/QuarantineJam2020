@@ -4,7 +4,7 @@ using UnityEngine;
 using RoboRyanTron.SearchableEnum;
 using System;
 
-public class PickupController : MonoBehaviour
+public class Vacuum : MonoBehaviour
 {
     const float PickSphereRadius = 0.3f;
 
@@ -23,10 +23,6 @@ public class PickupController : MonoBehaviour
     [Space(10.0f)]
     public Transform hands;
 
-    [Header("Keys")]
-    [SearchableEnum] public KeyCode interactKey;
-    [SearchableEnum] public KeyCode dropKey;
-
     [Header("Animation")]
     public float lerpTime = 0.3f;
     public AnimationCurve lerpCurve = AnimationCurve.Linear(0, 0, 1, 1);
@@ -34,6 +30,9 @@ public class PickupController : MonoBehaviour
     public List<Slicable> holding;
     public float currentCapacity;
 
+
+    [HideInInspector]
+    public Transform owner;
 
     Slicable holdee;
     Transform previousParent;
@@ -79,14 +78,14 @@ public class PickupController : MonoBehaviour
                 else
                 {
                     Debug.Log("Cant lift object");
+                    OnFailedSuck();
                 }
             }
         }
 
-
         if (Input.GetMouseButton(1))
         {
-            arc.SetParams(cam.transform.position + cam.transform.right * 0.2f, cam.transform.forward * throwForce, holdee.MeshVolume * holdee.materialData.weight, Physics.gravity);
+            //arc.SetParams(cam.transform.position + cam.transform.right * 0.2f, cam.transform.forward * throwForce, holdee.MeshVolume * holdee.materialData.weight, Physics.gravity);
 
             if (lastOutputTime + outputCooldown < Time.time)
             {
@@ -101,63 +100,29 @@ public class PickupController : MonoBehaviour
                     currentCapacity = Math.Max(0, currentCapacity);
                     holding.RemoveAt(0);
                 }
+                else
+                {
+                    OnEmptyOut();
+                }
             }
         }
         else
         {
             arc.Show(false);
         }
-
-        //if (holdee == null && Input.GetKeyDown(interactKey))
-        //{
-        //    arc.Show(false);
-        //    Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        //    RaycastHit hit;
-
-        //    if (Physics.SphereCast(ray, PickSphereRadius, out hit, pickMaxDistance, pickupLayer.value))
-        //    {
-        //        GameObject go = hit.transform.gameObject;
-        //        holdee = go.GetComponent<PickableObject>();
-
-        //        if (CanLiftObject(holdee))
-        //        {
-        //            StartCoroutine(MoveToHands(holdee));
-        //        }
-        //        else
-        //        {
-        //            Debug.Log("Cant lift object");
-        //        }
-        //    }
-
-        //    return;
-        //}
-
-        //if (holdee != null)
-        //{
-        //    if (holdee.DropOnUse)
-        //    {
-        //        arc.SetParams(cam.transform.position + cam.transform.right * 0.2f, cam.transform.forward * throwForce, holdee.MeshVolume * holdee.materialData.weight, Physics.gravity);
-        //    }
-        //    else
-        //    {
-        //        arc.Show(false);
-        //    }
-
-        //    if (Input.GetMouseButtonDown(0))
-        //    {
-        //        UseObject();
-        //    }
-
-        //    if (Input.GetKeyDown(dropKey))
-        //    {
-        //        DropObject();
-        //        holdee = null;
-        //    }
-
-        //}
     }
 
-    bool CanSuckObject(PickableObject po)
+    void OnFailedSuck ()
+    {
+
+    }
+
+    void OnEmptyOut ()
+    {
+
+    }
+
+    bool CanSuckObject(Slicable po)
     {
         return po != null && po.Mass + currentCapacity < maxCapacity;
     }
@@ -166,26 +131,14 @@ public class PickupController : MonoBehaviour
     {
         hh.gameObject.SetActive(true);
 
-        if (hh.DropOnUse)
-        {
-            hh.gameObject.layer = LayerMask.NameToLayer(pickupLayerName);
-            AttachObjectToHand(false, hh);
-            hh.EnablePhysics(true);
-        }
+        AttachObjectToHand(false, hh);
+        hh.EnablePhysics(true);
 
         hh.OnLeftClick(cam.transform, throwForce);
         arc.Show(false);
     }
 
-    void DropObject()
-    {
-        holdee.gameObject.layer = LayerMask.NameToLayer(pickupLayerName);
-        AttachObjectToHand(false, holdee);
-        holdee.EnablePhysics(true);
-        arc.Show(false);
-    }
-
-    void AttachObjectToHand(bool state, PickableObject go)
+    void AttachObjectToHand(bool state, Slicable go)
     {
         if (state)
         {
@@ -202,7 +155,7 @@ public class PickupController : MonoBehaviour
         }
     }
 
-    IEnumerator MoveToHands(PickableObject go)
+    IEnumerator MoveToHands(Slicable go)
     {
         if (go == null)
             yield break;
@@ -210,8 +163,6 @@ public class PickupController : MonoBehaviour
         Vector3 startWorld = go.transform.position;
         Vector3 startScale = go.transform.localScale;
         Quaternion startRotation = go.transform.rotation;
-
-        go.gameObject.layer = LayerMask.NameToLayer(cameraLayerName);
         go.EnablePhysics(false);
 
         float t = 0.0f;
@@ -231,4 +182,5 @@ public class PickupController : MonoBehaviour
 
         AttachObjectToHand(true, go);
     }
+
 }

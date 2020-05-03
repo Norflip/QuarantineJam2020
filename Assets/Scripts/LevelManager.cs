@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoSingleton<LevelManager>
 {
     public const float START_DELAY = 3.0f;
-    public const float GAME_TIME = 5.0f;//60.0f * 5; // 10.0f;
+    public const float GAME_TIME = 3 * 3; // 10.0f;
 
     public TextMeshProUGUI timer;
     public TextMeshProUGUI score;
@@ -85,16 +85,6 @@ public class LevelManager : MonoSingleton<LevelManager>
         SceneManager.LoadScene(0);
     }
     
-    public void Retry()
-    {        
-        Time.timeScale = 1;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        gameoverUI.SetActive(false);
-        SceneManager.LoadScene(1);
-       // SceneController.LoadScene(i, 1, 2);
-    }
-
     public void Retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

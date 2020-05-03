@@ -213,6 +213,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &688181861 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5392442702864129584, guid: ab91816dc13188548b9d7e29ed5a1970,
+    type: 3}
+  m_PrefabInstance: {fileID: 1769926188}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d202ee7abd2b34086c6d43d50d6cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &740842942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -580,6 +592,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5392442701620875300, guid: ab91816dc13188548b9d7e29ed5a1970,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5392442701736684360, guid: ab91816dc13188548b9d7e29ed5a1970,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -769,6 +786,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392442702864129599, guid: ab91816dc13188548b9d7e29ed5a1970,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392442702864129599, guid: ab91816dc13188548b9d7e29ed5a1970,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392442702864129599, guid: ab91816dc13188548b9d7e29ed5a1970,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392442702864129599, guid: ab91816dc13188548b9d7e29ed5a1970,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 688181861}
+    - target: {fileID: 5392442702864129599, guid: ab91816dc13188548b9d7e29ed5a1970,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392442702864129599, guid: ab91816dc13188548b9d7e29ed5a1970,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5392442702886880577, guid: ab91816dc13188548b9d7e29ed5a1970,
         type: 3}

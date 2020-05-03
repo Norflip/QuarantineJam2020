@@ -8,11 +8,8 @@ public class AudioLibrary : ScriptableObject
     [System.Serializable]
     public struct AudioLibraryData
     {
-        [NaughtyAttributes.ReorderableList]
-        public List<Sound> sounds;
-
-        [NaughtyAttributes.ReorderableList]
-        public List<SoundGroup> groups;
+        public Sound[] sounds;
+        public SoundGroup[] groups;
     }
 
     public AudioLibraryData data;

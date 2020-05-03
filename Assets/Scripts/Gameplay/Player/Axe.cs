@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Threading;
-using CielaSpike;
 
 public class Axe : MonoBehaviour
 {
@@ -57,21 +55,14 @@ public class Axe : MonoBehaviour
         RaycastHit[] hh = Physics.SphereCastAll(rr, 0.1f, maxSwingDistance, destroyableMask.value);
         Slicable slicee;
 
-        HashSet<Slicable> visited = new HashSet<Slicable>();
-
         for (int i = 0; i < hh.Length; i++)
         {
             if (hh[i].transform != transform)
             {
                 slicee = hh[i].transform.GetComponent<Slicable>();
 
-                if (slicee != null && slicee.materialData.breakable && !visited.Contains(slicee))
-                {
-                    //slicees.Add(slicee);
+                if (slicee != null && slicee.materialData.breakable)
                     slicee.TrySlice(user.position, user.right, true, out _);
-
-                    visited.Contains(slicee);
-                }
 
                 break;
             }

@@ -10,7 +10,6 @@ public class Slicable : MonoBehaviour
 {
     public const float MINIMUM_STICK_VELOCITY = 0.1f;
     public const float REQUIRED_FREEZE_TIME = 0.2f;
-    public const float LIFETIME = 24.0f;
     public const float MinimumVolume = 0.01f;
     public const float SplitForce = 4.0f;
 
@@ -56,13 +55,6 @@ public class Slicable : MonoBehaviour
     {
         m_broken = true;
         RecalculateVolume();
-        StartCoroutine(DestroyAfterTime());
-    }
-
-    IEnumerator DestroyAfterTime ()
-    {
-        yield return new WaitForSeconds(LIFETIME);
-        Destroy(gameObject);
     }
 
     public void RecalculateVolume()

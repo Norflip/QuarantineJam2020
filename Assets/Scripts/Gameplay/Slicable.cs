@@ -44,6 +44,9 @@ public class Slicable : MonoBehaviour
     float freezeTimer = 0.0f;
     float lastFreezeTime = -1;
 
+    [HideInInspector]
+    public Vector3 cacheScale;
+
     void Awake()
     {
         RecalculateVolume();

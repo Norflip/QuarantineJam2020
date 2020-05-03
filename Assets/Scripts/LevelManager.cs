@@ -14,6 +14,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     float startTime;
     float endTime;
     bool started = false;
+    bool freeroam = false;
 
     void Start()
     {
@@ -27,13 +28,26 @@ public class LevelManager : MonoSingleton<LevelManager>
         started = true;
     }
 
+    public void Freeroam()
+    {
+        freeroam = true;
+    }
+
     private void Update()
     {
         if (started)
         {
             score.text = CollectionManager.Instance.PointSum.ToString() + " $";
-            float timeRemaining = Mathf.Floor(Mathf.Max(endTime - Time.time, 0));
-            timer.text = "t - " + timeRemaining.ToString();
+
+            if (!freeroam)
+            {
+                float timeRemaining = Mathf.Floor(Mathf.Max(endTime - Time.time, 0));
+                timer.text = "t - " + timeRemaining.ToString();
+            }
+            else
+            {
+                timer.text = "";
+            }
         }
     }
 }

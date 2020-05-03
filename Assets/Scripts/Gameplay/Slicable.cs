@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using EzySlice;
-using UnityMeshSimplifier;
 using System;
 
+[DisallowMultipleComponent]
 [RequireComponent(typeof(MeshCollider), typeof(Rigidbody))]
 public class Slicable : MonoBehaviour
 {
@@ -158,9 +158,9 @@ public class Slicable : MonoBehaviour
         this.Rigidbody.AddForce(user.forward * force, ForceMode.VelocityChange);
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer(collectionLayer))
+        if (other.gameObject.layer == LayerMask.NameToLayer(collectionLayer))
         {
             float sqrv = Rigidbody.velocity.sqrMagnitude;
 
@@ -173,9 +173,9 @@ public class Slicable : MonoBehaviour
                 freezeTimer = 0.0f;
             }
 
-            if(freezeTimer >= REQUIRED_FREEZE_TIME)
+            if (freezeTimer >= REQUIRED_FREEZE_TIME)
             {
-               // Debug.Log(sqrv + " < " + (MINIMUM_STICK_VELOCITY * MINIMUM_STICK_VELOCITY));
+                // Debug.Log(sqrv + " < " + (MINIMUM_STICK_VELOCITY * MINIMUM_STICK_VELOCITY));
                 CollectionManager.Instance.AddObject(this);
                 return;
             }

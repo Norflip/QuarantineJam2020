@@ -23,6 +23,10 @@ public class Vacuum : MonoBehaviour
     public float suckForce = 0.2f;
 
     [Space(10.0f)]
+    public string propKey = "planeHeight";
+    public Material liquidMat;
+
+    [Space(10.0f)]
     public Transform hands;
 
     [Header("Animation")]
@@ -40,7 +44,12 @@ public class Vacuum : MonoBehaviour
     Transform previousParent;
     Camera cam;
     ThrowArc arc;
-    float lastOutputTime;
+
+    float nextOutputTime;
+
+    float liquidLevelVelocity;
+    float targetLiquidLevel;
+    float currentLiquidLevel;
 
     Animator vacuumAnimator;
 
@@ -52,12 +61,11 @@ public class Vacuum : MonoBehaviour
         cam = Camera.main;
         arc = GetComponent<ThrowArc>();
         currentCapacity = 0.0f;
-        lastOutputTime = Time.time;
+        nextOutputTime = Time.time;
     }
 
     private void Update()
-    {        
-
+    {
         if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
         {
             arc.Show(false);
@@ -81,6 +89,7 @@ public class Vacuum : MonoBehaviour
                 {
                     holding.Add(holdee);
                     currentCapacity += holdee.Mass;
+
                     StartCoroutine(MoveToHands(holdee));
                 }
                 else
@@ -99,10 +108,10 @@ public class Vacuum : MonoBehaviour
         {
             //arc.SetParams(cam.transform.position + cam.transform.right * 0.2f, cam.transform.forward * throwForce, holdee.MeshVolume * holdee.materialData.weight, Physics.gravity);            
             vacuumAnimator.SetBool("desorb", true);
-            if (lastOutputTime + outputCooldown < Time.time)
+
+            if (holding.Count > 0 && nextOutputTime < Time.time)
             {
-                Debug.Log("OUTUT");
-                lastOutputTime = Time.time;
+                nextOutputTime = Time.time + holding[0].MeshVolume * outputCooldown;
 
                 if (holding.Count > 0)
                 {
@@ -120,22 +129,26 @@ public class Vacuum : MonoBehaviour
         }
         else
         {
-            vacuumAnimator.SetBool("desorb", false);
-        }     
+            vacuumAnimator.SetBool("desorb", false);  
+            arc.Show(false);
+        }
 
+        UpdateBulb();
     }
 
-    void RaycastObjects ()
+    void UpdateBulb ()
+    {
+        targetLiquidLevel = currentCapacity / maxCapacity;
+        currentLiquidLevel = Mathf.SmoothDamp(currentLiquidLevel, targetLiquidLevel, ref liquidLevelVelocity, 0.1f);
+        liquidMat.SetFloat(propKey, Mathf.Lerp(0.5f, 1.0f, currentLiquidLevel));
+    }
+
+    void OnFailedSuck()
     {
 
     }
 
-    void OnFailedSuck ()
-    {
-
-    }
-
-    void OnEmptyOut ()
+    void OnEmptyOut()
     {
 
     }

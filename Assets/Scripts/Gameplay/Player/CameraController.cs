@@ -19,6 +19,7 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Start()
@@ -30,9 +31,9 @@ public class CameraController : MonoBehaviour
 
     private void Update ()
     {
-        if(Time.timeScale == 0)        
+        if (Time.timeScale == 0.0f)
             return;
-        
+
         RotateCamera();
     }
 

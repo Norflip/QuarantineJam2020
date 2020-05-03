@@ -181,7 +181,7 @@ public class Vacuum : MonoBehaviour
         else
         {
             go.transform.SetParent(previousParent, true);
-            go.transform.localScale = Vector3.one;
+            go.transform.localScale = go.cacheScale;
             go.gameObject.SetActive(true);
         }
     }
@@ -195,6 +195,8 @@ public class Vacuum : MonoBehaviour
         Vector3 startScale = go.transform.localScale;
         Quaternion startRotation = go.transform.rotation;
         go.EnablePhysics(false);
+
+        go.cacheScale = go.transform.localScale;
 
         float t = 0.0f;
         while (t <= 1.0f)

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9aee5969afacef6409031eca0c0a29fb, type: 3}
-  m_Name: Wood Material Data
+  m_Name: Porcelin Material Data
   m_EditorClassIdentifier: 
-  rarity: 100
-  weight: 10
+  rarity: 165
+  weight: 14
   breakable: 1
-  crossSectionMaterial: {fileID: 2100000, guid: 2209d0df026180440834e9c7037333ba,
+  crossSectionMaterial: {fileID: 2100000, guid: a2e0cb305ed269e4f926a6788948c80f,
     type: 2}

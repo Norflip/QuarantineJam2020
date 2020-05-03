@@ -6,7 +6,7 @@ using System;
 
 public class Vacuum : MonoBehaviour
 {
-    const float PickSphereRadius = 0.3f;
+    const float PickSphereRadius = 0.4f;
 
     public LayerMask pickupLayer;
     public string pickupLayerName = "Pickable";
@@ -19,6 +19,8 @@ public class Vacuum : MonoBehaviour
 
     public float windupTime = 0.7f;
     public float outputCooldown = 0.6f;
+
+    public float suckForce = 0.2f;
 
     [Space(10.0f)]
     public Transform hands;
@@ -110,6 +112,11 @@ public class Vacuum : MonoBehaviour
         {
             arc.Show(false);
         }
+    }
+
+    void RaycastObjects ()
+    {
+
     }
 
     void OnFailedSuck ()

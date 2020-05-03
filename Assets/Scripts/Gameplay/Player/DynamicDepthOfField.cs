@@ -31,13 +31,17 @@ public class DynamicDepthOfField : MonoBehaviour
 
     private void Start()
     {
-        iv.profile.TryGet(out depthOfField);
+        if (iv != null)
+            iv.profile.TryGet(out depthOfField);
 
         //postProcessVolume.profile.TryGetSettings(out depthOfField);
     }
 
     public void UpdateDepthOfField()
     {
+        if (iv != null)
+            return;
+
         viewRaycast = new Ray(transform.position, transform.forward * maxFocusDistance);
         m_hasFocus = false;
 
@@ -61,7 +65,6 @@ public class DynamicDepthOfField : MonoBehaviour
     {
         //depthOfField.focusDistance.value = Mathf.Lerp(depthOfField.focusDistance.value, m_hitDistance, focusSpeed * Time.deltaTime);
     }
-
     private void OnDrawGizmos()
     {
         if (HasFocus)

@@ -42,8 +42,13 @@ public class Vacuum : MonoBehaviour
     ThrowArc arc;
     float lastOutputTime;
 
+    Animator vacuumAnimator;
+
     private void Awake()
     {
+        
+        vacuumAnimator = GetComponent<Animator>();
+
         cam = Camera.main;
         arc = GetComponent<ThrowArc>();
         currentCapacity = 0.0f;
@@ -51,8 +56,9 @@ public class Vacuum : MonoBehaviour
     }
 
     private void Update()
-    {
-        if(Input.GetMouseButton(0) && Input.GetMouseButton(1))
+    {        
+
+        if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
         {
             arc.Show(false);
             return;
@@ -62,7 +68,7 @@ public class Vacuum : MonoBehaviour
         {
             // suck in
             //show suck in effects
-
+            vacuumAnimator.SetBool("absorb", true);
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -84,11 +90,15 @@ public class Vacuum : MonoBehaviour
                 }
             }
         }
-
+        else
+        {
+            vacuumAnimator.SetBool("absorb", false);
+        }
+                
         if (Input.GetMouseButton(1))
         {
-            //arc.SetParams(cam.transform.position + cam.transform.right * 0.2f, cam.transform.forward * throwForce, holdee.MeshVolume * holdee.materialData.weight, Physics.gravity);
-
+            //arc.SetParams(cam.transform.position + cam.transform.right * 0.2f, cam.transform.forward * throwForce, holdee.MeshVolume * holdee.materialData.weight, Physics.gravity);            
+            vacuumAnimator.SetBool("desorb", true);
             if (lastOutputTime + outputCooldown < Time.time)
             {
                 Debug.Log("OUTUT");
@@ -110,8 +120,9 @@ public class Vacuum : MonoBehaviour
         }
         else
         {
-            arc.Show(false);
-        }
+            vacuumAnimator.SetBool("desorb", false);
+        }     
+
     }
 
     void RaycastObjects ()

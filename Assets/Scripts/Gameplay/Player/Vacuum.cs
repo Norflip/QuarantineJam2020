@@ -132,11 +132,6 @@ public class Vacuum : MonoBehaviour
         liquidMat.SetFloat(propKey, Mathf.Lerp(0.5f, 1.0f, currentLiquidLevel));
     }
 
-    void RaycastObjects()
-    {
-
-    }
-
     void OnFailedSuck()
     {
 

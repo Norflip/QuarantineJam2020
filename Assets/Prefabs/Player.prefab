@@ -955,9 +955,9 @@ MonoBehaviour:
     m_Bits: 256
   pickupLayerName: Pickable
   cameraLayerName: PickupCamera
-  pickMaxDistance: 1.5
+  pickMaxDistance: 3
   throwForce: 30
-  maxCapacity: 60
+  maxCapacity: 50
   windupTime: 0.7
   outputCooldown: 0.6
   suckForce: 0.2

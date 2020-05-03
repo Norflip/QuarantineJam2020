@@ -18,6 +18,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     float endTime;
     float timeRemaining;
     bool started = false;
+    bool freeroam = false;
 
     // game over
     public GameObject gameoverUI;
@@ -34,18 +35,29 @@ public class LevelManager : MonoSingleton<LevelManager>
         started = true;
     }
 
+    public void Freeroam()
+    {
+        freeroam = true;
+    }
+
     private void Update()
     {
         if (started)
         {
             score.text = CollectionManager.Instance.PointSum.ToString() + " $";
-            timeRemaining = Mathf.Floor(Mathf.Max(endTime - Time.time, 0));
-            timer.text = "t - " + timeRemaining.ToString();
 
+            if (!freeroam)
+            {
+                float timeRemaining = Mathf.Floor(Mathf.Max(endTime - Time.time, 0));
+                timer.text = "t - " + timeRemaining.ToString();
+            }
+            else
+            {
+                timer.text = "";
+            }
         }
 
-
-        if(timeRemaining <= 0)
+        if(Mathf.Max(endTime - Time.time, 0) <= 0)
         {
             Gameover();
         }       

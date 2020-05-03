@@ -17,3 +17,5 @@ MonoBehaviour:
   breakable: 1
   crossSectionMaterial: {fileID: 2100000, guid: a2e0cb305ed269e4f926a6788948c80f,
     type: 2}
+  soundKey: PORSLINSPLIT
+  playAsGroup: 1

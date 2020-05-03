@@ -28,7 +28,6 @@ public class CameraController : MonoBehaviour
         dynamicDepthOfField = GetComponent<DynamicDepthOfField>();
     }
 
-
     private void Update ()
     {
         if (Time.timeScale == 0.0f)

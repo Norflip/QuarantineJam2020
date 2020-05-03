@@ -17,3 +17,5 @@ MonoBehaviour:
   breakable: 1
   crossSectionMaterial: {fileID: 2100000, guid: 23b4f799a5a35ee4e8e6daf6034ec00d,
     type: 2}
+  soundKey: METALLICSPLIT
+  playAsGroup: 1

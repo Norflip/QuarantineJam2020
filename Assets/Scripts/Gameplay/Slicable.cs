@@ -15,8 +15,6 @@ public class Slicable : MonoBehaviour
 
     public MaterialData materialData;
     public bool changeRotationOnPickup = false;
-    public bool startAsleep = true;
-
     public string collectionLayer = "Collection";
 
     public bool Broken => m_broken;
@@ -50,8 +48,7 @@ public class Slicable : MonoBehaviour
     void Awake()
     {
         RecalculateVolume();
-        if (startAsleep)
-            Rigidbody.Sleep();
+        Rigidbody.Sleep();
     }
 
     public void OnSplit()
@@ -93,7 +90,7 @@ public class Slicable : MonoBehaviour
             Vector3 localPosition = transform.InverseTransformPoint(position);
             Vector3 localNormal = transform.InverseTransformDirection(normal);
             EzySlice.Plane plane = new EzySlice.Plane(localPosition, localNormal);
-        
+
             GameObject[] objs = gameObject.SliceInstantiate(plane, new TextureRegion(0, 0, 1, 1), materialData.crossSectionMaterial);
 
             if (objs != null)
@@ -101,6 +98,11 @@ public class Slicable : MonoBehaviour
                 objects = new Slicable[objs.Length];
                 for (int i = 0; i < objs.Length; i++)
                     objects[i] = CreateSplitPiece(objs[i], position, normal);
+
+                if (!materialData.playAsGroup)
+                    AudioManager.Instance.PlayEffect(materialData.soundKey, transform.position, 0.8f);
+                else
+                    AudioManager.Instance.PlayGroup(materialData.soundKey, transform.position, 0.8f);
 
                 Destroy(gameObject);
                 split = true;
@@ -143,7 +145,7 @@ public class Slicable : MonoBehaviour
 
         UnityEngine.Plane p = new UnityEngine.Plane(planeNormal, planePosition);
         int dir = p.GetSide(mc.bounds.center) ? 1 : -1;
-        
+
         upper.Rigidbody.AddForce(planeNormal * dir * SplitForce, ForceMode.VelocityChange);
         return upper;
     }
@@ -174,6 +176,19 @@ public class Slicable : MonoBehaviour
                 CollectionManager.Instance.AddObject(this);
                 return;
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        float modifier = Rigidbody.velocity.magnitude / 30.0f;
+        if (!materialData.playAsGroup)
+        {
+            AudioManager.Instance.PlayEffect(materialData.soundKey, transform.position, modifier);
+        }
+        else
+        {
+            AudioManager.Instance.PlayGroup(materialData.soundKey, transform.position, modifier);
         }
     }
 

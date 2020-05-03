@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoSingleton<LevelManager>
 {
     public const float START_DELAY = 3.0f;
-    public const float GAME_TIME = 60.0f * 5; // 10.0f;
+    public const float GAME_TIME = 5.0f;//60.0f * 5; // 10.0f;
 
     public TextMeshProUGUI timer;
     public TextMeshProUGUI score;
@@ -35,6 +36,11 @@ public class LevelManager : MonoSingleton<LevelManager>
     public void Freeroam()
     {
         freeroam = true;
+
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        gameoverUI.SetActive(false);
     }
 
     private void Update()
@@ -54,7 +60,7 @@ public class LevelManager : MonoSingleton<LevelManager>
             }
         }
 
-        if(Mathf.Max(endTime - Time.time, 0) <= 0)
+        if(!freeroam && Mathf.Max(endTime - Time.time, 0) <= 0)
         {
             Gameover();
         }
@@ -68,12 +74,18 @@ public class LevelManager : MonoSingleton<LevelManager>
         gameoverUI.SetActive(true);
     }
 
-    void Retry(int i)
+    public void GoMainMenu ()
     {
-        Time.timeScale = 1;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        SceneController.LoadScene(i, 1, 2);
+        SceneManager.LoadScene(0);
     }
 
+    public void Retry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void QuitApp ()
+    {
+        Application.Quit();
+    }
 }

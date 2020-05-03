@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class Axe : MonoBehaviour
 {
+    public const float SEPERATION_FORCE = 5.0f;
+
     public LayerMask destroyableMask;
     public float swingTime = 0.2f;
     public float swingCooldown = 0.7f;
-    public float maxSwingDistance = 1.5f;
+    public float maxSwingDistance = 4.5f;
 
     public float arc = 45.0f;
     public int raycastCount = 10;
@@ -27,10 +29,13 @@ public class Axe : MonoBehaviour
 
     private void Update()
     {
-        if (lastSwing == -1 || lastSwing + swingCooldown < Time.time)
+        if (Input.GetMouseButtonDown(0))
         {
-            StartCoroutine(Swing(owner));
-            lastSwing = Time.time;
+            if (lastSwing == -1 || lastSwing + swingCooldown < Time.time)
+            {
+                StartCoroutine(Swing(owner));
+                lastSwing = Time.time;
+            }
         }
     }
 
@@ -60,19 +65,19 @@ public class Axe : MonoBehaviour
         Debug.Log("SLICING");
 
         Ray rr = new Ray(user.position, user.forward);
-        RaycastHit[] hh = Physics.SphereCastAll(rr, 0.1f, 5.0f, destroyableMask.value);
+        RaycastHit[] hh = Physics.SphereCastAll(rr, 0.1f, maxSwingDistance, destroyableMask.value);
         Slicable slicee;
 
         List<Slicable> slicees = new List<Slicable>();
         HashSet<Slicable> visited = new HashSet<Slicable>();
-            
+
         for (int i = 0; i < hh.Length; i++)
         {
-            if(hh[i].transform != transform)
+            if (hh[i].transform != transform)
             {
                 slicee = hh[i].transform.GetComponent<Slicable>();
 
-                if(slicee != null && slicee.materialData.breakable && !visited.Contains(slicee))
+                if (slicee != null && slicee.materialData.breakable && !visited.Contains(slicee))
                 {
                     slicees.Add(slicee);
                     visited.Contains(slicee);

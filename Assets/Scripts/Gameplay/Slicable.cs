@@ -12,7 +12,7 @@ public class Slicable : MonoBehaviour
     public const float REQUIRED_FREEZE_TIME = 0.2f;
     public const float LIFETIME = 24.0f;
     public const float MinimumVolume = 0.01f;
-    public const float SplitForce = 10.0f;
+    public const float SplitForce = 4.0f;
 
     public MaterialData materialData;
     public bool changeRotationOnPickup = false;
@@ -142,14 +142,20 @@ public class Slicable : MonoBehaviour
 
         upper.OnSplit();
 
+
+
         float side = Mathf.Sign(Vector3.Dot(planeNormal, (upper.transform.position - planePosition).normalized));
-        upper.Rigidbody.AddForce(planeNormal * side * SplitForce);
+
+        UnityEngine.Plane p = new UnityEngine.Plane(planeNormal, planePosition);
+        int dir = p.GetSide(mc.bounds.center) ? 1 : -1;
+        
+        upper.Rigidbody.AddForce(planeNormal * dir * SplitForce, ForceMode.VelocityChange);
         return upper;
     }
 
     public void OnLeftClick(Transform user, float force)
     {
-        this.Rigidbody.AddForce(user.forward * force, ForceMode.Impulse);
+        this.Rigidbody.AddForce(user.forward * force, ForceMode.VelocityChange);
     }
 
     private void OnCollisionStay(Collision collision)

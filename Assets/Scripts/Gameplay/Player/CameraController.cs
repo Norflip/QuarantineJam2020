@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
     }
 
 
-    private void FixedUpdate()
+    private void Update ()
     {
         RotateCamera();
     }

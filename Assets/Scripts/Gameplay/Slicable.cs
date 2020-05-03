@@ -5,27 +5,51 @@ using EzySlice;
 using UnityMeshSimplifier;
 using System;
 
-[RequireComponent(typeof(MeshCollider))]
-public class Slicable : PickableObject
+[RequireComponent(typeof(MeshCollider), typeof(Rigidbody))]
+public class Slicable : MonoBehaviour
 {
     public const float MINIMUM_STICK_VELOCITY = 0.1f;
     public const float REQUIRED_FREEZE_TIME = 0.2f;
     public const float LIFETIME = 24.0f;
+    public const float MinimumVolume = 0.01f;
+    public const float SplitForce = 10.0f;
 
-    
-    const float SplitForce = 10.0f;
+    public MaterialData materialData;
+    public bool changeRotationOnPickup = false;
+    public bool startAsleep = true;
+
     public string collectionLayer = "Collection";
 
     public bool Broken => m_broken;
-    public override bool DropOnUse => true;
+
+    public Rigidbody Rigidbody
+    {
+        get
+        {
+            if (m_rb == null) m_rb = GetComponent<Rigidbody>();
+            return m_rb;
+        }
+    }
+
+    Rigidbody m_rb;
+
+    public float Mass => meshVolume * materialData.weight;
+
+    public float MeshVolume => meshVolume;
+    float meshVolume;
+
+    [HideInInspector]
+    public float OriginalMeshVolume = -1;
 
     bool m_broken = false;
     float freezeTimer = 0.0f;
     float lastFreezeTime = -1;
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
+        RecalculateVolume();
+        if (startAsleep)
+            Rigidbody.Sleep();
     }
 
     public void OnSplit()
@@ -39,6 +63,28 @@ public class Slicable : PickableObject
     {
         yield return new WaitForSeconds(LIFETIME);
         Destroy(gameObject);
+    }
+
+    public void RecalculateVolume()
+    {
+        meshVolume = MeshData.CalculateMeshVolume(GetComponent<MeshFilter>().sharedMesh, transform.localScale);
+        if (meshVolume < MinimumVolume)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        OriginalMeshVolume = meshVolume;
+        Rigidbody.mass = meshVolume * materialData.weight;
+    }
+
+    public void EnablePhysics(bool state)
+    {
+        Collider[] colliders = GetComponentsInChildren<Collider>();
+        for (int i = 0; i < colliders.Length; i++)
+            colliders[i].enabled = state;
+
+        m_rb.isKinematic = !state;
     }
 
     public bool TrySlice(Vector3 position, Vector3 normal, bool selfDestroy, out Slicable[] objects)
@@ -101,7 +147,7 @@ public class Slicable : PickableObject
         return upper;
     }
 
-    public override void OnLeftClick(Transform user, float force)
+    public void OnLeftClick(Transform user, float force)
     {
         this.Rigidbody.AddForce(user.forward * force, ForceMode.Impulse);
     }

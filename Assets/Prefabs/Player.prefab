@@ -679,8 +679,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada97373922e36f49b35fcb76e64c996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vacuum: {fileID: 0}
+  vacuum: {fileID: 1738447910712690188}
   axe: {fileID: 6122741028888735572}
+  axeInstruction: {fileID: 0}
+  vacuumInstruction: {fileID: 0}
 --- !u!114 &5288047497493057016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,6 +933,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   holding: []
   currentCapacity: 0
+  owner: {fileID: 0}
 --- !u!114 &4153047766298315186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -952,6 +955,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5010829154882354833}
     m_Modifications:
+    - target: {fileID: 412455578, guid: 21a38910f3a8d7f4d9523476846cefcc, type: 3}
+      propertyPath: maxSwingDistance
+      value: 4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1814312355333867818, guid: 21a38910f3a8d7f4d9523476846cefcc,
         type: 3}
       propertyPath: m_Name

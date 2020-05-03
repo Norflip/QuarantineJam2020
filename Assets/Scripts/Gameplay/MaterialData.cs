@@ -17,4 +17,7 @@ public class MaterialData : ScriptableObject
 
     public bool breakable = true;
     public Material crossSectionMaterial;
+
+    public string soundKey = "";
+    public bool playAsGroup = false;
 }

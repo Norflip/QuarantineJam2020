@@ -22,6 +22,10 @@ public class Vacuum : MonoBehaviour
 
     public float suckForce = 0.2f;
 
+    [Header("audio")]
+    public string spitKey = "VACUUMSPIT";
+    public string suckKey = "VACUUMSUCK";
+
     [Space(10.0f)]
     public string propKey = "planeHeight";
     public Material liquidMat;
@@ -87,6 +91,7 @@ public class Vacuum : MonoBehaviour
 
                 if (CanSuckObject(holdee))
                 {
+                    AudioManager.Instance.PlayEffect(suckKey, 0.5f);
                     holding.Add(holdee);
                     currentCapacity += holdee.Mass;
 
@@ -117,6 +122,7 @@ public class Vacuum : MonoBehaviour
                 {
                     UseObject(holding[0]);
 
+                    AudioManager.Instance.PlayEffect(spitKey, 0.5f);
                     currentCapacity -= holding[0].Mass;
                     currentCapacity = Math.Max(0, currentCapacity);
                     holding.RemoveAt(0);

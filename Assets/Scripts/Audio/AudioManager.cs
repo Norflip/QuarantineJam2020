@@ -57,12 +57,12 @@ public class AudioManager : MonoSingleton<AudioManager>
             }
         }
     }
-    public AudioSource PlayEffect(string effectName)
+    public AudioSource PlayEffect(string effectName, float volumeModifier)
     {
-        return PlayEffect(effectName, Vector3.zero);
+        return PlayEffect(effectName, Vector3.zero, volume);
     }
 
-    public AudioSource PlayEffect(string effectName, Vector3 pos)
+    public AudioSource PlayEffect(string effectName, Vector3 pos, float volumeModifier)
     {
         //Kolla så vår listener finns
 
@@ -81,7 +81,7 @@ public class AudioManager : MonoSingleton<AudioManager>
             source.clip = value.clip;
 
             source.pitch = value.pitch;
-            source.volume = value.volume;
+            source.volume = value.volume * volumeModifier;
             source.loop = looping = value.loop;
             source.spatialBlend = value.spatialBlend;
             source.playOnAwake = false;
@@ -108,7 +108,6 @@ public class AudioManager : MonoSingleton<AudioManager>
 
         if (!looping)
         {
-            Debug.Log("play time");
             PoolManager.Return(prefab.gameObject, source.gameObject, playTime);
         }
 
@@ -122,23 +121,23 @@ public class AudioManager : MonoSingleton<AudioManager>
         source.Play(0);
     }
 
-    public AudioSource PlayGroup(string key)
+    public AudioSource PlayGroup(string key, float volumeModifier)
     {
         if (_groupDictionary.ContainsKey(key))
         {
-            return PlayEffect(_groupDictionary[key].variationKeys[Random.Range(0, _groupDictionary[key].variationKeys.Length)]);
+            return PlayEffect(_groupDictionary[key].variationKeys[Random.Range(0, _groupDictionary[key].variationKeys.Length)], volumeModifier);
         }
 
         return null;
     }
 
-    public AudioSource PlayGroup(string key, Vector3 pos)
+    public AudioSource PlayGroup(string key, Vector3 pos, float volumeModifier)
     {
         if (!_groupDictionary.ContainsKey(key)) 
             return null;
         
         //Leta upp rätt variationkey från groupDicten
         var temp = _groupDictionary[key].variationKeys[Random.Range(0, _groupDictionary[key].variationKeys.Length)];
-        return PlayEffect(temp, pos);
+        return PlayEffect(temp, pos, volumeModifier);
     }
 }

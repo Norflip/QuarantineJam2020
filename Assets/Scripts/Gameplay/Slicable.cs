@@ -99,6 +99,11 @@ public class Slicable : MonoBehaviour
                 for (int i = 0; i < objs.Length; i++)
                     objects[i] = CreateSplitPiece(objs[i], position, normal);
 
+                if (!materialData.playAsGroup)
+                    AudioManager.Instance.PlayEffect(materialData.soundKey, transform.position, 0.8f);
+                else
+                    AudioManager.Instance.PlayGroup(materialData.soundKey, transform.position, 0.8f);
+
                 Destroy(gameObject);
                 split = true;
             }
@@ -171,6 +176,19 @@ public class Slicable : MonoBehaviour
                 CollectionManager.Instance.AddObject(this);
                 return;
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        float modifier = Rigidbody.velocity.magnitude / 30.0f;
+        if (!materialData.playAsGroup)
+        {
+            AudioManager.Instance.PlayEffect(materialData.soundKey, transform.position, modifier);
+        }
+        else
+        {
+            AudioManager.Instance.PlayGroup(materialData.soundKey, transform.position, modifier);
         }
     }
 

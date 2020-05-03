@@ -15,8 +15,6 @@ public class Slicable : MonoBehaviour
 
     public MaterialData materialData;
     public bool changeRotationOnPickup = false;
-    public bool startAsleep = true;
-
     public string collectionLayer = "Collection";
 
     public bool Broken => m_broken;
@@ -50,8 +48,7 @@ public class Slicable : MonoBehaviour
     void Awake()
     {
         RecalculateVolume();
-        if (startAsleep)
-            Rigidbody.Sleep();
+        Rigidbody.Sleep();
     }
 
     public void OnSplit()
@@ -93,7 +90,7 @@ public class Slicable : MonoBehaviour
             Vector3 localPosition = transform.InverseTransformPoint(position);
             Vector3 localNormal = transform.InverseTransformDirection(normal);
             EzySlice.Plane plane = new EzySlice.Plane(localPosition, localNormal);
-        
+
             GameObject[] objs = gameObject.SliceInstantiate(plane, new TextureRegion(0, 0, 1, 1), materialData.crossSectionMaterial);
 
             if (objs != null)
@@ -143,7 +140,7 @@ public class Slicable : MonoBehaviour
 
         UnityEngine.Plane p = new UnityEngine.Plane(planeNormal, planePosition);
         int dir = p.GetSide(mc.bounds.center) ? 1 : -1;
-        
+
         upper.Rigidbody.AddForce(planeNormal * dir * SplitForce, ForceMode.VelocityChange);
         return upper;
     }

@@ -290,9 +290,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialData: {fileID: 11400000, guid: 21d4fe51f2b40214f88314f50014e64f, type: 2}
   changeRotationOnPickup: 0
-  startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &72782023
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -601,9 +601,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialData: {fileID: 11400000, guid: 21d4fe51f2b40214f88314f50014e64f, type: 2}
   changeRotationOnPickup: 0
-  startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &421029068
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -831,9 +831,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialData: {fileID: 11400000, guid: 21d4fe51f2b40214f88314f50014e64f, type: 2}
   changeRotationOnPickup: 0
-  startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &554739659
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1072,9 +1072,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialData: {fileID: 11400000, guid: 21d4fe51f2b40214f88314f50014e64f, type: 2}
   changeRotationOnPickup: 0
-  startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &742437881
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1551,9 +1551,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialData: {fileID: 11400000, guid: 21d4fe51f2b40214f88314f50014e64f, type: 2}
   changeRotationOnPickup: 0
-  startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &1042145656
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1927,9 +1927,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialData: {fileID: 11400000, guid: 21d4fe51f2b40214f88314f50014e64f, type: 2}
   changeRotationOnPickup: 0
-  startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &1439017838
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2106,9 +2106,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialData: {fileID: 11400000, guid: 21d4fe51f2b40214f88314f50014e64f, type: 2}
   changeRotationOnPickup: 0
-  startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &1537428155
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2317,9 +2317,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialData: {fileID: 11400000, guid: 21d4fe51f2b40214f88314f50014e64f, type: 2}
   changeRotationOnPickup: 0
-  startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &1607536342
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2552,9 +2552,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialData: {fileID: 11400000, guid: 21d4fe51f2b40214f88314f50014e64f, type: 2}
   changeRotationOnPickup: 0
-  startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &1713738760
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2597,7 +2597,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 8704cf0a06d07c4428a73541fba0f210,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.458
+      value: 1.792
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 8704cf0a06d07c4428a73541fba0f210,
         type: 3}
@@ -2682,9 +2682,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialData: {fileID: 11400000, guid: 21d4fe51f2b40214f88314f50014e64f, type: 2}
   changeRotationOnPickup: 0
-  startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &1788233157
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2994,9 +2994,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialData: {fileID: 11400000, guid: 21d4fe51f2b40214f88314f50014e64f, type: 2}
   changeRotationOnPickup: 0
-  startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &2055076686
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3118,9 +3118,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialData: {fileID: 11400000, guid: 21d4fe51f2b40214f88314f50014e64f, type: 2}
   changeRotationOnPickup: 0
-  startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &2091069242
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3242,9 +3242,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialData: {fileID: 11400000, guid: 21d4fe51f2b40214f88314f50014e64f, type: 2}
   changeRotationOnPickup: 0
-  startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &2133614037
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -10,6 +10,9 @@ public class MovementController : MonoBehaviour
     public LayerMask interactionMask;
     public float movementSpeed = 15.0f;
 
+    public string footstepSoundKey = "slippers";
+    public float footstepLength = 0.2f;
+
     [Header("Gravity")]
     public Vector3 gravityDirection = new Vector3(0, -1, 0);
     public float gravityForce = 9.0f;
@@ -20,12 +23,13 @@ public class MovementController : MonoBehaviour
     CharacterController characterController;
 
     [SerializeField] private bool walking = true;
-    [SerializeField] private bool grounded = true;
     [SerializeField] private Vector3 externalVelocity;
-    Vector3 controllerContactPoint;
+    Vector3 lastPos;
+    float distanceWalked;
 
     private void Awake()
     {
+        lastPos = transform.position;
         characterController = GetComponent<CharacterController>();
         externalVelocity = Vector3.zero;
     }
@@ -44,15 +48,22 @@ public class MovementController : MonoBehaviour
         moveDirection = new Vector3(input.x, -0.1f, input.z);
         moveDirection = transform.TransformDirection(moveDirection) * movementSpeed + externalVelocity;
 
-        grounded = (characterController.Move(moveDirection * Time.fixedDeltaTime) & CollisionFlags.Below) != 0;
+        characterController.Move(moveDirection * Time.fixedDeltaTime);
         externalVelocity *= 0.95f;
-                
+
+        distanceWalked += (transform.position - lastPos).magnitude;
+
+        if (distanceWalked > footstepLength)
+        {
+            AudioManager.Instance.PlayGroup(footstepSoundKey, 1.0f);
+            distanceWalked = 0.0f;
+        }
+
+        lastPos = transform.position;
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        controllerContactPoint = hit.point;
-
         if(hit.rigidbody != null)
         {
             Vector3 direction = (hit.point - transform.position).normalized;

@@ -17,3 +17,5 @@ MonoBehaviour:
   breakable: 1
   crossSectionMaterial: {fileID: 2100000, guid: 2209d0df026180440834e9c7037333ba,
     type: 2}
+  soundKey: WOODSPLIT
+  playAsGroup: 1

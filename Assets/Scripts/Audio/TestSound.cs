@@ -12,21 +12,21 @@ public class TestSound : MonoBehaviour
     void Run ()
     {
         if (Application.isPlaying)
-            AudioManager.Instance.PlayEffect(key);
+            AudioManager.Instance.PlayEffect(key, 1.0f);
     }
 
     [NaughtyAttributes.Button]
     void Run3D ()
     {
         if (Application.isPlaying)
-            AudioManager.Instance.PlayEffect(key, transform.position);
+            AudioManager.Instance.PlayEffect(key, transform.position, 1.0f);
     }
 
     [NaughtyAttributes.Button]
     void RunAsGroup ()
     {
         if (Application.isPlaying)
-            AudioManager.Instance.PlayGroup(key, transform.position);
+            AudioManager.Instance.PlayGroup(key, transform.position, 1.0f);
     }
 
     [NaughtyAttributes.Button]

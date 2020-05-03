@@ -293,6 +293,7 @@ MonoBehaviour:
   startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &72782023
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -604,6 +605,7 @@ MonoBehaviour:
   startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &421029068
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -620,6 +622,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &484745696 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7137681744921084731, guid: ab91816dc13188548b9d7e29ed5a1970,
+    type: 3}
+  m_PrefabInstance: {fileID: 5392442703349005625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &503052408 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5392442702886880577, guid: ab91816dc13188548b9d7e29ed5a1970,
@@ -834,6 +848,7 @@ MonoBehaviour:
   startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &554739659
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1075,6 +1090,7 @@ MonoBehaviour:
   startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &742437881
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1554,6 +1570,7 @@ MonoBehaviour:
   startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &1042145656
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1695,6 +1712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: {fileID: 503052408}
   score: {fileID: 718308283}
+  totalScore: {fileID: 484745696}
   gameoverUI: {fileID: 1779582331}
 --- !u!1 &1262595408
 GameObject:
@@ -1930,6 +1948,7 @@ MonoBehaviour:
   startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &1439017838
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2109,6 +2128,7 @@ MonoBehaviour:
   startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &1537428155
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2320,6 +2340,7 @@ MonoBehaviour:
   startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &1607536342
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2555,6 +2576,7 @@ MonoBehaviour:
   startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &1713738760
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2685,6 +2707,7 @@ MonoBehaviour:
   startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &1788233157
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2997,6 +3020,7 @@ MonoBehaviour:
   startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &2055076686
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3121,6 +3145,7 @@ MonoBehaviour:
   startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &2091069242
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3245,6 +3270,7 @@ MonoBehaviour:
   startAsleep: 1
   collectionLayer: Collection
   OriginalMeshVolume: -1
+  cacheScale: {x: 0, y: 0, z: 0}
 --- !u!54 &2133614037
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3536,6 +3562,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 162034885698400709, guid: ab91816dc13188548b9d7e29ed5a1970,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1178087953}
+    - target: {fileID: 162034885698400709, guid: ab91816dc13188548b9d7e29ed5a1970,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Retry
+      objectReference: {fileID: 0}
+    - target: {fileID: 162034885698400709, guid: ab91816dc13188548b9d7e29ed5a1970,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 162034885698400709, guid: ab91816dc13188548b9d7e29ed5a1970,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 534928417100740428, guid: ab91816dc13188548b9d7e29ed5a1970,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -3779,6 +3825,31 @@ PrefabInstance:
     - target: {fileID: 6612326967002315503, guid: ab91816dc13188548b9d7e29ed5a1970,
         type: 3}
       propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137681744921084731, guid: ab91816dc13188548b9d7e29ed5a1970,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137681744921084731, guid: ab91816dc13188548b9d7e29ed5a1970,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137681744921084731, guid: ab91816dc13188548b9d7e29ed5a1970,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137681744921084731, guid: ab91816dc13188548b9d7e29ed5a1970,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7208150431500048653, guid: ab91816dc13188548b9d7e29ed5a1970,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8158559444381960568, guid: ab91816dc13188548b9d7e29ed5a1970,

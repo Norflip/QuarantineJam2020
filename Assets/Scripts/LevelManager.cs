@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 using TMPro;
 
 public class LevelManager : MonoSingleton<LevelManager>
@@ -10,6 +12,7 @@ public class LevelManager : MonoSingleton<LevelManager>
 
     public TextMeshProUGUI timer;
     public TextMeshProUGUI score;
+    public TextMeshProUGUI totalScore;
 
     float startTime;
     float endTime;
@@ -39,33 +42,34 @@ public class LevelManager : MonoSingleton<LevelManager>
             timeRemaining = Mathf.Floor(Mathf.Max(endTime - Time.time, 0));
             timer.text = "t - " + timeRemaining.ToString();
 
-
         }
 
 
         if(timeRemaining <= 0)
         {
             Gameover();
-        }
-        
+        }       
 
 
     }
 
     void Gameover()
     {
+        totalScore.text = "You got " + score.text;
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         gameoverUI.SetActive(true);
     }
 
-    void Retry(int i)
-    {
+    public void Retry()
+    {        
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        SceneController.LoadScene(i, 1, 2);
+        gameoverUI.SetActive(false);
+        SceneManager.LoadScene(1);
+       // SceneController.LoadScene(i, 1, 2);
     }
 
 }

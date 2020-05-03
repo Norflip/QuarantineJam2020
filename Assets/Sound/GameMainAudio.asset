@@ -13,5 +13,45 @@ MonoBehaviour:
   m_Name: GameMainAudio
   m_EditorClassIdentifier: 
   data:
-    sounds: []
+    sounds:
+    - key: 
+      clip: {fileID: 0}
+      type: 0
+      volume: 0
+      pitch: 0
+      spatialBlend: 0
+      loop: 0
+      oneShot: 0
+    - key: 
+      clip: {fileID: 0}
+      type: 0
+      volume: 0
+      pitch: 0
+      spatialBlend: 0
+      loop: 0
+      oneShot: 0
+    - key: 
+      clip: {fileID: 0}
+      type: 0
+      volume: 0
+      pitch: 0
+      spatialBlend: 0
+      loop: 0
+      oneShot: 0
+    - key: 
+      clip: {fileID: 0}
+      type: 0
+      volume: 0
+      pitch: 0
+      spatialBlend: 0
+      loop: 0
+      oneShot: 0
+    - key: 
+      clip: {fileID: 0}
+      type: 0
+      volume: 0
+      pitch: 0
+      spatialBlend: 0
+      loop: 0
+      oneShot: 0
     groups: []

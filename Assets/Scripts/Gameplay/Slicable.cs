@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using EzySlice;
-using UnityMeshSimplifier;
 using System;
 
 [DisallowMultipleComponent]

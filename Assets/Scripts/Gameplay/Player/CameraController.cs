@@ -30,6 +30,9 @@ public class CameraController : MonoBehaviour
 
     private void Update ()
     {
+        if(Time.timeScale == 0)        
+            return;
+        
         RotateCamera();
     }
 

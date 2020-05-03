@@ -6,14 +6,18 @@ using TMPro;
 public class LevelManager : MonoSingleton<LevelManager>
 {
     public const float START_DELAY = 3.0f;
-    public const float GAME_TIME = 60.0f * 5;
+    public const float GAME_TIME = 60.0f * 5; // 10.0f;
 
     public TextMeshProUGUI timer;
     public TextMeshProUGUI score;
 
     float startTime;
     float endTime;
+    float timeRemaining;
     bool started = false;
+
+    // game over
+    public GameObject gameoverUI;
 
     void Start()
     {
@@ -32,8 +36,36 @@ public class LevelManager : MonoSingleton<LevelManager>
         if (started)
         {
             score.text = CollectionManager.Instance.PointSum.ToString() + " $";
-            float timeRemaining = Mathf.Floor(Mathf.Max(endTime - Time.time, 0));
+            timeRemaining = Mathf.Floor(Mathf.Max(endTime - Time.time, 0));
             timer.text = "t - " + timeRemaining.ToString();
+
+
         }
+
+
+        if(timeRemaining <= 0)
+        {
+            Gameover();
+        }
+        
+
+
     }
+
+    void Gameover()
+    {
+        Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        gameoverUI.SetActive(true);
+    }
+
+    void Retry(int i)
+    {
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SceneController.LoadScene(i, 1, 2);
+    }
+
 }

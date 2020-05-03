@@ -2,10 +2,11 @@
 
 public class Button : MonoBehaviour
 {
+    
     public void LoadScene(int i)
     {
-        // fade out in 1 sec, wait 2 sec, fade in - in 1 sec
-        
+        if (Time.timeScale == 0f)
+            Time.timeScale = 1f;
         SceneController.LoadScene(i, 1, 2);
     }
 

@@ -46,6 +46,7 @@ public class MovementController : MonoBehaviour
 
         grounded = (characterController.Move(moveDirection * Time.fixedDeltaTime) & CollisionFlags.Below) != 0;
         externalVelocity *= 0.95f;
+                
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)

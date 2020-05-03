@@ -42,18 +42,18 @@ public class AudioManager : MonoSingleton<AudioManager>
         for (int i = 0; i < libraries.Length; i++)
         { 
             //loopa igenom alla sounds i detta libraryt
-            for (int j = 0; j < libraries[i].sounds.Count; j++)
+            for (int j = 0; j < libraries[i].data.sounds.Count; j++)
             {
                 //lägg till den i sounddicten
-                _soundDictionary.Add(libraries[i].sounds[j].key, 
-                    libraries[i].sounds[j]);
+                _soundDictionary.Add(libraries[i].data.sounds[j].key, 
+                    libraries[i].data.sounds[j]);
             }
             //loopa igenom alla soundsGroups i detta libraryt
-            for (int j = 0; j < libraries[i].groups.Count; j++)
+            for (int j = 0; j < libraries[i].data.groups.Count; j++)
             {
                 //lägg till den i sounddicten
-                _groupDictionary.Add(libraries[i].groups[j].key, 
-                    libraries[i].groups[j]);
+                _groupDictionary.Add(libraries[i].data.groups[j].key, 
+                    libraries[i].data.groups[j]);
             }
         }
     }

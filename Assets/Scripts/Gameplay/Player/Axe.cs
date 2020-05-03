@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Axe : PickableObject
+public class Axe : MonoBehaviour
 {
     public LayerMask destroyableMask;
     public float swingTime = 0.2f;
@@ -13,24 +13,23 @@ public class Axe : PickableObject
     public float arc = 45.0f;
     public int raycastCount = 10;
 
+    [HideInInspector]
+    public Transform owner;
+
     float lastSwing = -1;
     Animator animator;
     Transform user;
 
-    public override bool DropOnUse => false;
-
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         animator = GetComponent<Animator>();
     }
 
-    public override void OnLeftClick(Transform user, float force)
+    private void Update()
     {
         if (lastSwing == -1 || lastSwing + swingCooldown < Time.time)
         {
-            this.user = user;
-            StartCoroutine(Swing(user));
+            StartCoroutine(Swing(owner));
             lastSwing = Time.time;
         }
     }
@@ -115,4 +114,5 @@ public class Axe : PickableObject
         }
 
     }
+
 }

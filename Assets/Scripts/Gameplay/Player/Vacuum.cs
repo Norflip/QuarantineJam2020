@@ -6,7 +6,7 @@ using System;
 
 public class Vacuum : MonoBehaviour
 {
-    const float PickSphereRadius = 0.3f;
+    const float PickSphereRadius = 0.4f;
 
     public LayerMask pickupLayer;
     public string pickupLayerName = "Pickable";
@@ -19,6 +19,8 @@ public class Vacuum : MonoBehaviour
 
     public float windupTime = 0.7f;
     public float outputCooldown = 0.6f;
+
+    public float suckForce = 0.2f;
 
     [Space(10.0f)]
     public Transform hands;
@@ -38,19 +40,20 @@ public class Vacuum : MonoBehaviour
     Transform previousParent;
     Camera cam;
     ThrowArc arc;
-    float lastOutputTime;
+
+    float nextOutputTime;
 
     private void Awake()
     {
         cam = Camera.main;
         arc = GetComponent<ThrowArc>();
         currentCapacity = 0.0f;
-        lastOutputTime = Time.time;
+        nextOutputTime = Time.time;
     }
 
     private void Update()
     {
-        if(Input.GetMouseButton(0) && Input.GetMouseButton(1))
+        if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
         {
             arc.Show(false);
             return;
@@ -87,10 +90,9 @@ public class Vacuum : MonoBehaviour
         {
             //arc.SetParams(cam.transform.position + cam.transform.right * 0.2f, cam.transform.forward * throwForce, holdee.MeshVolume * holdee.materialData.weight, Physics.gravity);
 
-            if (lastOutputTime + outputCooldown < Time.time)
+            if (holding.Count > 0 && nextOutputTime < Time.time)
             {
-                Debug.Log("OUTUT");
-                lastOutputTime = Time.time;
+                nextOutputTime = Time.time + holding[0].MeshVolume * outputCooldown;
 
                 if (holding.Count > 0)
                 {
@@ -112,12 +114,17 @@ public class Vacuum : MonoBehaviour
         }
     }
 
-    void OnFailedSuck ()
+    void RaycastObjects()
     {
 
     }
 
-    void OnEmptyOut ()
+    void OnFailedSuck()
+    {
+
+    }
+
+    void OnEmptyOut()
     {
 
     }

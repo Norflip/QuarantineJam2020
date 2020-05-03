@@ -602,8 +602,6 @@ GameObject:
   - component: {fileID: 5010829155393599862}
   - component: {fileID: 3920981496848833039}
   - component: {fileID: 5288047497493057016}
-  - component: {fileID: 5010829155393599860}
-  - component: {fileID: 5010829155393599863}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -697,30 +695,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 3617627001745696318}
   segments: 16
---- !u!114 &5010829155393599860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5010829155393599851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68b940c2903c2ed48a02b20a978952cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5010829155393599863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5010829155393599851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73c4a2fd828179340b29f2de3e7575cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6473019420604100431
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,6 +879,7 @@ MonoBehaviour:
   maxCapacity: 60
   windupTime: 0.7
   outputCooldown: 0.6
+  suckForce: 0.2
   hands: {fileID: 5010829154882354833}
   lerpTime: 0.3
   lerpCurve:

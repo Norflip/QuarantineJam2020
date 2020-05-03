@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 
 public class AudioManager : MonoSingleton<AudioManager>
 {
-    [Expandable, NaughtyAttributes.ReorderableList]
+    [Expandable]
     public AudioLibrary[] libraries;
     public AudioSource prefab;
     public float audioSourceLifeMultiplier = 2.0f;
@@ -42,14 +42,14 @@ public class AudioManager : MonoSingleton<AudioManager>
         for (int i = 0; i < libraries.Length; i++)
         { 
             //loopa igenom alla sounds i detta libraryt
-            for (int j = 0; j < libraries[i].data.sounds.Count; j++)
+            for (int j = 0; j < libraries[i].data.sounds.Length; j++)
             {
                 //lägg till den i sounddicten
                 _soundDictionary.Add(libraries[i].data.sounds[j].key, 
                     libraries[i].data.sounds[j]);
             }
             //loopa igenom alla soundsGroups i detta libraryt
-            for (int j = 0; j < libraries[i].data.groups.Count; j++)
+            for (int j = 0; j < libraries[i].data.groups.Length; j++)
             {
                 //lägg till den i sounddicten
                 _groupDictionary.Add(libraries[i].data.groups[j].key, 

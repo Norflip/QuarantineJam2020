@@ -31,7 +31,7 @@ public class LevelManager : MonoSingleton<LevelManager>
     {
         if (started)
         {
-            score.text = CollectionManager.Instance.sum.ToString() + " $";
+            score.text = CollectionManager.Instance.PointSum.ToString() + " $";
             float timeRemaining = Mathf.Floor(Mathf.Max(endTime - Time.time, 0));
             timer.text = "t - " + timeRemaining.ToString();
         }

@@ -23,6 +23,10 @@ public class Vacuum : MonoBehaviour
     public float suckForce = 0.2f;
 
     [Space(10.0f)]
+    public string propKey = "planeHeight";
+    public Material liquidMat;
+
+    [Space(10.0f)]
     public Transform hands;
 
     [Header("Animation")]
@@ -42,6 +46,10 @@ public class Vacuum : MonoBehaviour
     ThrowArc arc;
 
     float nextOutputTime;
+
+    float liquidLevelVelocity;
+    float targetLiquidLevel;
+    float currentLiquidLevel;
 
     private void Awake()
     {
@@ -76,6 +84,7 @@ public class Vacuum : MonoBehaviour
                 {
                     holding.Add(holdee);
                     currentCapacity += holdee.Mass;
+
                     StartCoroutine(MoveToHands(holdee));
                 }
                 else
@@ -112,6 +121,15 @@ public class Vacuum : MonoBehaviour
         {
             arc.Show(false);
         }
+
+        UpdateBulb();
+    }
+
+    void UpdateBulb ()
+    {
+        targetLiquidLevel = currentCapacity / maxCapacity;
+        currentLiquidLevel = Mathf.SmoothDamp(currentLiquidLevel, targetLiquidLevel, ref liquidLevelVelocity, 0.1f);
+        liquidMat.SetFloat(propKey, Mathf.Lerp(0.5f, 1.0f, currentLiquidLevel));
     }
 
     void RaycastObjects()

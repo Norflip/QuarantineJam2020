@@ -51,8 +51,13 @@ public class Vacuum : MonoBehaviour
     float targetLiquidLevel;
     float currentLiquidLevel;
 
+    Animator vacuumAnimator;
+
     private void Awake()
     {
+        
+        vacuumAnimator = GetComponent<Animator>();
+
         cam = Camera.main;
         arc = GetComponent<ThrowArc>();
         currentCapacity = 0.0f;
@@ -71,7 +76,7 @@ public class Vacuum : MonoBehaviour
         {
             // suck in
             //show suck in effects
-
+            vacuumAnimator.SetBool("absorb", true);
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -94,10 +99,15 @@ public class Vacuum : MonoBehaviour
                 }
             }
         }
-
+        else
+        {
+            vacuumAnimator.SetBool("absorb", false);
+        }
+                
         if (Input.GetMouseButton(1))
         {
-            //arc.SetParams(cam.transform.position + cam.transform.right * 0.2f, cam.transform.forward * throwForce, holdee.MeshVolume * holdee.materialData.weight, Physics.gravity);
+            //arc.SetParams(cam.transform.position + cam.transform.right * 0.2f, cam.transform.forward * throwForce, holdee.MeshVolume * holdee.materialData.weight, Physics.gravity);            
+            vacuumAnimator.SetBool("desorb", true);
 
             if (holding.Count > 0 && nextOutputTime < Time.time)
             {
@@ -119,6 +129,7 @@ public class Vacuum : MonoBehaviour
         }
         else
         {
+            vacuumAnimator.SetBool("desorb", false);  
             arc.Show(false);
         }
 
@@ -130,11 +141,6 @@ public class Vacuum : MonoBehaviour
         targetLiquidLevel = currentCapacity / maxCapacity;
         currentLiquidLevel = Mathf.SmoothDamp(currentLiquidLevel, targetLiquidLevel, ref liquidLevelVelocity, 0.1f);
         liquidMat.SetFloat(propKey, Mathf.Lerp(0.5f, 1.0f, currentLiquidLevel));
-    }
-
-    void RaycastObjects()
-    {
-
     }
 
     void OnFailedSuck()
@@ -175,7 +181,7 @@ public class Vacuum : MonoBehaviour
         else
         {
             go.transform.SetParent(previousParent, true);
-            go.transform.localScale = Vector3.one;
+            go.transform.localScale = go.cacheScale;
             go.gameObject.SetActive(true);
         }
     }
@@ -189,6 +195,8 @@ public class Vacuum : MonoBehaviour
         Vector3 startScale = go.transform.localScale;
         Quaternion startRotation = go.transform.rotation;
         go.EnablePhysics(false);
+
+        go.cacheScale = go.transform.localScale;
 
         float t = 0.0f;
         while (t <= 1.0f)

@@ -15,5 +15,5 @@ MonoBehaviour:
   rarity: 100
   weight: 10
   breakable: 1
-  crossSectionMaterial: {fileID: 2100000, guid: a89bef69bad65be439dd26fcb005986f,
+  crossSectionMaterial: {fileID: 2100000, guid: 2209d0df026180440834e9c7037333ba,
     type: 2}

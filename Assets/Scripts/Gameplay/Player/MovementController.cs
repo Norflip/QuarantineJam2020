@@ -51,7 +51,6 @@ public class MovementController : MonoBehaviour
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         controllerContactPoint = hit.point;
-        Debug.Log("hit: " + hit.gameObject.name);
 
         if(hit.rigidbody != null)
         {

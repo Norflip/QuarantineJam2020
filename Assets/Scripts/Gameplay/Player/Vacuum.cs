@@ -51,8 +51,13 @@ public class Vacuum : MonoBehaviour
     float targetLiquidLevel;
     float currentLiquidLevel;
 
+    Animator vacuumAnimator;
+
     private void Awake()
     {
+        
+        vacuumAnimator = GetComponent<Animator>();
+
         cam = Camera.main;
         arc = GetComponent<ThrowArc>();
         currentCapacity = 0.0f;
@@ -71,7 +76,7 @@ public class Vacuum : MonoBehaviour
         {
             // suck in
             //show suck in effects
-
+            vacuumAnimator.SetBool("absorb", true);
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
@@ -94,10 +99,15 @@ public class Vacuum : MonoBehaviour
                 }
             }
         }
-
+        else
+        {
+            vacuumAnimator.SetBool("absorb", false);
+        }
+                
         if (Input.GetMouseButton(1))
         {
-            //arc.SetParams(cam.transform.position + cam.transform.right * 0.2f, cam.transform.forward * throwForce, holdee.MeshVolume * holdee.materialData.weight, Physics.gravity);
+            //arc.SetParams(cam.transform.position + cam.transform.right * 0.2f, cam.transform.forward * throwForce, holdee.MeshVolume * holdee.materialData.weight, Physics.gravity);            
+            vacuumAnimator.SetBool("desorb", true);
 
             if (holding.Count > 0 && nextOutputTime < Time.time)
             {
@@ -119,6 +129,7 @@ public class Vacuum : MonoBehaviour
         }
         else
         {
+            vacuumAnimator.SetBool("desorb", false);  
             arc.Show(false);
         }
 

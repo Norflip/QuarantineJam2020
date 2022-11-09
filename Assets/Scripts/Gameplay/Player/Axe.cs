@@ -15,6 +15,8 @@ public class Axe : MonoBehaviour
     public float arc = 45.0f;
     public int raycastCount = 10;
 
+    public string audioKey = "AXE";
+
     [HideInInspector]
     public Transform owner;
 
@@ -43,6 +45,8 @@ public class Axe : MonoBehaviour
     {
         // start animation
         animator.Play("Swing");
+        AudioManager.Instance.PlayEffect(audioKey, 1.0f);
+
         SplitObjects(user);
         yield return new WaitForSeconds(swingTime);
     }

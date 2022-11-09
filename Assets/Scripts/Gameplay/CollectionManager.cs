@@ -34,9 +34,10 @@ public class CollectionManager : MonoSingleton<CollectionManager>
         {
             Material m = oldMats[i];
 
-            if (oldMats[i].HasProperty("_Color"))
+            if (oldMats[i].HasProperty("Color_75A9C323"))
             {
-                m.color = Color.Lerp(m.color, freezeColor, freezeColorFactor);
+                Color c = m.GetColor("Color_75A9C323");
+                m.color = Color.Lerp(c, freezeColor, freezeColorFactor);
             }
 
             mats[i] = m;

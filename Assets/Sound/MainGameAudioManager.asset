@@ -257,7 +257,7 @@ MonoBehaviour:
     - key: VACUUMSPIT
       clip: {fileID: 8300000, guid: 17f3581ac7425fe419642ceeeff05c03, type: 3}
       type: 0
-      volume: 1
+      volume: 0.5
       pitch: 1
       spatialBlend: 0
       loop: 0
@@ -265,7 +265,7 @@ MonoBehaviour:
     - key: VACUUMSUCK
       clip: {fileID: 8300000, guid: 339ebb71a571f5a4b86a74bc1843f710, type: 3}
       type: 0
-      volume: 1
+      volume: 0.5
       pitch: 1
       spatialBlend: 0
       loop: 0

@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoSingleton<LevelManager>
 {
     public const float START_DELAY = 3.0f;
-    public const float GAME_TIME = 3 * 3; // 10.0f;
+    public const float GAME_TIME = 60 * 4f; // 10.0f;
 
     public TextMeshProUGUI timer;
     public TextMeshProUGUI score;

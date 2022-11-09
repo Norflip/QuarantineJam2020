@@ -20,6 +20,8 @@ public class Vacuum : MonoBehaviour
     public float windupTime = 0.7f;
     public float outputCooldown = 0.6f;
 
+    public float maxVolume = 1.0f;
+
     public float suckForce = 0.2f;
 
     [Header("audio")]
@@ -91,7 +93,7 @@ public class Vacuum : MonoBehaviour
 
                 if (CanSuckObject(holdee))
                 {
-                    AudioManager.Instance.PlayEffect(suckKey, 0.5f);
+                    AudioManager.Instance.PlayEffect(suckKey, 0.2f);
                     holding.Add(holdee);
                     currentCapacity += holdee.Mass;
 
@@ -122,7 +124,7 @@ public class Vacuum : MonoBehaviour
                 {
                     UseObject(holding[0]);
 
-                    AudioManager.Instance.PlayEffect(spitKey, 0.5f);
+                    AudioManager.Instance.PlayEffect(spitKey, 0.2f);
                     currentCapacity -= holding[0].Mass;
                     currentCapacity = Math.Max(0, currentCapacity);
                     holding.RemoveAt(0);
@@ -161,7 +163,7 @@ public class Vacuum : MonoBehaviour
 
     bool CanSuckObject(Slicable po)
     {
-        return po != null && po.Mass + currentCapacity < maxCapacity;
+        return po != null && po.Mass + currentCapacity < maxCapacity && po.MeshVolume <= maxVolume;
     }
 
     void UseObject(Slicable hh)

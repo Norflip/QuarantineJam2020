@@ -1,0 +1,346 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cc15e83ebb87f44f83318320b0b807d, type: 3}
+  m_Name: MainGameAudioManager
+  m_EditorClassIdentifier: 
+  data:
+    sounds:
+    - key: AXE
+      clip: {fileID: 8300000, guid: 9d951f0934bdf7c4081ad012aae77c91, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 0
+      loop: 0
+      oneShot: 1
+    - key: MUSIC
+      clip: {fileID: 8300000, guid: 025cb6ce43f84ca4cb4d7fda21b4d4ad, type: 3}
+      type: 2
+      volume: 1
+      pitch: 1
+      spatialBlend: 0
+      loop: 1
+      oneShot: 0
+    - key: GUITARSPLIT1
+      clip: {fileID: 8300000, guid: ac23d21ab55e5184e8c4f080c17e8253, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: GUITARSPLIT2
+      clip: {fileID: 8300000, guid: dc142175a62948e48885f212c7664199, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: GUITARSPLIT3
+      clip: {fileID: 8300000, guid: db80e5c96dc8a7644957e3a751008a19, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: GUITARSPLIT4
+      clip: {fileID: 8300000, guid: c7d5a07e36a324d4ebae71b9e247e2c1, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: METALLICSPLIT1
+      clip: {fileID: 8300000, guid: 14075dab4a6b2e547b85132f5398f7e9, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: METALLICSPLIT2
+      clip: {fileID: 8300000, guid: c47183ab6b9cfae46a8acbaf57013e12, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: METALLICSPLIT3
+      clip: {fileID: 8300000, guid: 39b1cb565fc62e442bfeab233a00a98c, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: METALLICSPLIT4
+      clip: {fileID: 8300000, guid: e5b212b59da3f4d44a568e1bcc53bb4f, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: OBJECTBOUNCE1
+      clip: {fileID: 8300000, guid: f846335221c784948af34e85b7080153, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: OBJECTBOUNCE2
+      clip: {fileID: 8300000, guid: 152449dcdd5c9224ba149bf05fd59509, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: OBJECTBOUNCE3
+      clip: {fileID: 8300000, guid: 4341d597d6a436b4cb50a44893095311, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: OBJECTBOUNCE4
+      clip: {fileID: 8300000, guid: e4fc77fbbb65611489fb462e14ae6d3e, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: PIANOSPLIT1
+      clip: {fileID: 8300000, guid: a748aefc67bccf246803b24ce77dcd82, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: PIANOSPLIT2
+      clip: {fileID: 8300000, guid: 27c68405cccea5f458a62819c59d10e9, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: PIANOSPLIT3
+      clip: {fileID: 8300000, guid: f4092c4ade6ddba42b2c808e26f7d89a, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: PIANOSPLIT4
+      clip: {fileID: 8300000, guid: cc48af9116ae7a744992053e17432bc6, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: PORSLINSPLIT1
+      clip: {fileID: 8300000, guid: da27f8a7a25bdf241a7edc52a3b553ae, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: PORSLINSPLIT2
+      clip: {fileID: 8300000, guid: 396bd36f6c5d1cd488750a3778d98841, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: PORSLINSPLIT3
+      clip: {fileID: 8300000, guid: 681eb95304730ba49899a4379746daec, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 0
+    - key: SLIPPERS1
+      clip: {fileID: 8300000, guid: 5ae35b7f9b87e4d40afbb22370753539, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 0
+      loop: 0
+      oneShot: 1
+    - key: SLIPPERS2
+      clip: {fileID: 8300000, guid: 46204c844dc8165458f25be1214706b7, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 0
+      loop: 0
+      oneShot: 1
+    - key: SLIPPERS3
+      clip: {fileID: 8300000, guid: 4a0e02abdc9ddb8448f8c986cc272f37, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 0
+      loop: 0
+      oneShot: 1
+    - key: SLIPPERS4
+      clip: {fileID: 8300000, guid: b25b8ae97bd7a5f41be237378a90e3bd, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 0
+      loop: 0
+      oneShot: 1
+    - key: INTROSPEECH
+      clip: {fileID: 8300000, guid: 6b6100278bfd0464eb0c3aba193096e5, type: 3}
+      type: 1
+      volume: 1
+      pitch: 1
+      spatialBlend: 0
+      loop: 0
+      oneShot: 1
+    - key: THROW1
+      clip: {fileID: 8300000, guid: 794c11c4d5b5d364f98851f9f90a9892, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 0
+      loop: 0
+      oneShot: 1
+    - key: THROW2
+      clip: {fileID: 8300000, guid: a55d0985222e5694dab6c1d6263bc1b7, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 0
+      loop: 0
+      oneShot: 1
+    - key: THROW3
+      clip: {fileID: 8300000, guid: 3fdb6277c9adb104e813ed56e8bad313, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 0
+      loop: 0
+      oneShot: 1
+    - key: TRUCKIDLE
+      clip: {fileID: 8300000, guid: 9aca58cdb8a72864abd83e175cf1a238, type: 3}
+      type: 1
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 1
+      oneShot: 0
+    - key: VACUUMSPIT
+      clip: {fileID: 8300000, guid: 17f3581ac7425fe419642ceeeff05c03, type: 3}
+      type: 0
+      volume: 0.5
+      pitch: 1
+      spatialBlend: 0
+      loop: 0
+      oneShot: 1
+    - key: VACUUMSUCK
+      clip: {fileID: 8300000, guid: 339ebb71a571f5a4b86a74bc1843f710, type: 3}
+      type: 0
+      volume: 0.5
+      pitch: 1
+      spatialBlend: 0
+      loop: 0
+      oneShot: 1
+    - key: WOODSPLIT1
+      clip: {fileID: 8300000, guid: 89f7aaac37f355f449fc5201a220cf20, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: WOODSPLIT2
+      clip: {fileID: 8300000, guid: 5815598829550ea4499ea8274aa84ccd, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: WOODSPLIT3
+      clip: {fileID: 8300000, guid: 21f8181d39e47834ab01859a2c9aa62a, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    - key: WOODSPLIT4
+      clip: {fileID: 8300000, guid: 7b1feeac11bf3f14082ac0785cba7858, type: 3}
+      type: 0
+      volume: 1
+      pitch: 1
+      spatialBlend: 1
+      loop: 0
+      oneShot: 1
+    groups:
+    - key: GUITARSPLIT
+      variationKeys:
+      - GUITARSPLIT1
+      - GUITARSPLIT2
+      - GUITARSPLIT3
+      - GUITARSPLIT4
+    - key: METALLICSPLIT
+      variationKeys:
+      - METALLICSPLIT1
+      - METALLICSPLIT2
+      - METALLICSPLIT3
+      - METALLICSPLIT4
+    - key: OBJECTBOUNCE
+      variationKeys:
+      - OBJECTBOUNCE1
+      - OBJECTBOUNCE2
+      - OBJECTBOUNCE3
+      - OBJECTBOUNCE4
+    - key: PIANOSPLIT
+      variationKeys:
+      - PIANOSPLIT1
+      - PIANOSPLIT2
+      - PIANOSPLIT3
+      - PIANOSPLIT4
+    - key: PORSLINSPLIT
+      variationKeys:
+      - PORSLINSPLIT1
+      - PORSLINSPLIT2
+      - PORSLINSPLIT3
+    - key: SLIPPERS
+      variationKeys:
+      - SLIPPERS1
+      - SLIPPERS2
+      - SLIPPERS3
+      - SLIPPERS4
+    - key: WOODSPLIT
+      variationKeys:
+      - WOODSPLIT1
+      - WOODSPLIT2
+      - WOODSPLIT3
+      - WOODSPLIT4
